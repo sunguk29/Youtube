@@ -1,0 +1,517 @@
+.container_bar {
+    width: 200px;
+    margin-top: 10px;
+    border-bottom: 1px solid #d3d3d3;
+    font-size: 12px;
+}
+
+.hoverTest {
+    cursor: pointer;
+}
+
+.hoverTest:hover {
+    background-color: #d3d3d3;
+}
+
+.badge badge-primary {
+    background-color: white;
+}
+
+.leftSideBarFooter a {
+    font-size: 10px;
+    color: black;
+}
+
+.leftSideBarFooterInformation {
+    font-size: 10px;
+    color: grey;
+}
+
+
+.scrolls {
+    height: 800px;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.one {
+    background-color: white;
+    width: 200px;
+    margin: 0 auto;
+    /* 스크롤바가 absolute로 들어가기 때문에
+       여기다가 relative를 준다 */
+    position: relative;
+
+}
+
+.scrolls::-webkit-scrollbar {
+    /* 스크롤바 너비 조절하는 부분 */
+    width: 10px;
+}
+
+.scrolls::-webkit-scrollbar,
+.scrolls::-webkit-scrollbar-thumb {
+    overflow: visible;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, .2);
+}
+
+.cover-bar {
+    width: 10px;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    -webkit-transition: all .1s;
+    opacity: 1;
+    /* 배경색을 상자색과 똑같이 맞춰준다 */
+    background-color: white;
+}
+
+/* 중요한 부분 */
+.one:hover .cover-bar {
+    opacity: 0;
+    -webkit-transition: all .1s;
+}
+
+.videoTime {
+    position: absolute;
+
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    line-height: 0.5;
+}
+
+.videoTimeBackGround {
+    position: absolute;
+    top: 1006px;
+    left: 225px;
+    z-index: 2;
+}
+
+.videoMore {
+    transition: .1s ease;
+    opacity: 0;
+    position: absolute;
+    top: 1050px;
+    left: 250px;
+
+    text-align: center;
+}
+
+.media-body:hover .videoMore {
+    opacity: 1;
+}
+
+.videoMore1 {
+    transition: .1s ease;
+    opacity: 0;
+    position: absolute;
+    left: 300px;
+
+    text-align: center;
+}
+
+.card:hover .videoMore1 {
+    opacity: 1;
+}
+
+.sub-btn{
+    position: absolute;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.card-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-text{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sub_info{
+    width: 210px;
+    height: 190px;
+}
+
+.sub_img, .sub_title, .sub_text, .sub_btn{
+    margin-left: 60px;
+}
+
+.sub_text {
+    font-size: 12px;
+}
+
+.creat_video_list_info {
+    margin-left: 10px;
+    font-size: 12px;
+}
+
+#cancelBtn, #addBtn {
+    display: none;
+}
+
+.creat_video_list_overlay {
+    background-color: black;
+    position: absolute;
+    height: 140px;
+    width: 108px;
+    left: 137px;
+}
+
+
+.dropdown-menu {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+}
+
+.video_dropdown {
+    width: 30px;
+}
+
+/*  temptemptemptemptemptemptemptemptemptemptemptemptemptemp  */
+
+list-group list-group-horizontal:hover {
+    background-color: #ECECEC;
+}
+
+/* 카테고리 */
+.category-h {
+    position: relative;
+    left: 50px;
+}
+
+.categoryContainner > .list-group {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+}
+
+.list-group-item {
+    border-right: none;
+    border-left: none;
+
+}
+
+li > .btn-primary {
+    border: 1px solid darkgray;
+    border-radius: 16px;
+    background-color: #ECECEC;
+    color: black;
+
+}
+
+.carousel slide {
+    position: relative;
+    left: 100px;
+    top: 100px;
+}
+
+/* 동영상 검색 */
+.search-h {
+    position: relative;
+    top: 120px;
+    left: 50px;
+}
+
+.input-group {
+    position: relative;
+    top: 150px;
+    left: 100px;
+    width: 700px;
+}
+
+/* 동영상 댓글 */
+
+.comment-h {
+    position: relative;
+    top: 200px;
+    left: 50px;
+}
+
+.commentContainner {
+    position: relative;
+    top: 230px;
+    left: 150px;
+}
+
+.media > img {
+    height: 50px;
+    width: 50px;
+    border-radius: 26px;
+}
+
+.userTime {
+    display: flex;
+}
+
+.mt-0 {
+    width: 150px;
+    white-space: nowrap;
+    font-size: 1.3rem;
+    font-weight: 500;
+    line-height: 1.8rem;
+    color: #606060;
+}
+
+.time {
+    color: #606060;
+    line-height: 1.8rem;
+    font-size: 1.0rem;
+    font-weight: 200;
+}
+
+.comment-content {
+    height: 100px;
+    width: 490px;
+}
+
+
+div > .btn-primary {
+    all: unset;
+
+}
+
+/* 동영상 컨텐츠 */
+
+.contents-h {
+    position: relative;
+    top: 300px;
+    left: 50px;
+}
+
+.contentsContainner {
+    position: relative;
+    top: 330px;
+    left: 150px;
+}
+
+.subcribeAlarm {
+    position: relative;
+    float: right;
+    top: -80px;
+    right: 900px;
+}
+
+.subscribe-state {
+    border: none;
+    background: #ECECEC;
+    width: 70px;
+    height: 40px;
+}
+
+.subcribe-num {
+    padding-bottom: 30px;
+}
+
+/* 채널 카테고리 리스트 */
+
+.channelCategory-h {
+    position: relative;
+    top: 400px;
+    left: 50px;
+}
+
+.channel-category-containner > .list-group {
+    position: relative;
+    top: 450px;
+    left: 50px;
+    padding-bottom: 80px;
+}
+
+.channel-category-containner > .list-group > .list-group-item {
+    border: none;
+}
+
+.channel-category-containner > .list-group > .list-group-item > .btn {
+    all: unset;
+}
+
+/* 채널 top 리스트 */
+.channel_top {
+    position: relative;
+    top: 500px;
+    left: 50px;
+}
+
+.top_container {
+    position: relative;
+    top: 530px;
+    left: 150px;
+    display: flex;
+}
+
+.top_container > img {
+    height: 100px;
+    width: 100px;
+    border-radius: 75px;
+}
+
+.top_container > .media-body {
+    top: 10px;
+    left: 10px;
+}
+
+.top_container > .media-body > .mt-0 {
+    font-weight: 400;
+}
+
+/* 업로드된 비디오 */
+
+.upload_video {
+    position: relative;
+    top: 600px;
+    left: 50px;
+}
+
+.upload_containner {
+    position: relative;
+    display: flex;
+    top: 630px;
+    left: 50px;
+}
+
+.card {
+    margin: 10px;
+}
+
+/* 채널정보 */
+
+.channel_info {
+    position: relative;
+    top: 700px;
+    left: 50px;
+}
+
+.channel_info_containner {
+    position: relative;
+    top: 30px;
+    left: 50px;
+    display: flex;
+    width: 1000px;
+
+}
+
+.channel_info_containner > .row {
+    width: 1000px;
+}
+
+.channel_info_containner > .row > .col-lg-4 > .list-group-item {
+    width: 400px;
+    word-break:break-word;
+}
+
+.channel_info_containner > .row > .col-lg-4 > .list-group-item > .info_contents {
+    width: 400px;
+    word-break:break-word;
+}
+
+/* 채널 - 저장된 재생목록 */
+
+.video_list {
+    position: relative;
+    top: 800px;
+    left: 50px;
+}
+
+.video_list_dropdown{
+    top: 820px;
+    left: 50px;
+}
+
+.video_list_containner {
+    position: relative;
+    top: 840px;
+    left: 50px;
+    display: flex;
+}
+
+/* 검색 결과 리스트 */
+
+.serach_list {
+    position: relative;
+    top: 900px;
+    left: 50px;
+}
+
+.serach_list_filter {
+    position: relative;
+    top: 920px;
+    left: 50px;
+}
+
+.search_list_containner {
+    position: relative;
+    top: 940px;
+    left: 50px;
+    padding-bottom: 50px;
+}
+
+.search_list_containner > .media > img {
+    height: 205px;
+    width: 360px;
+    border-radius: 2px;
+}
+
+.search_list_containner > .media > .media-body > .mt_0 {
+    font-size: 1.8rem;
+    line-height: 2.6rem;
+    font-weight: 400;
+}
+
+.search_list_sub_media {
+    display: flex;
+}
+
+.search_list_reg_date {
+    padding-left: 10px;
+}
+
+.search_list_writer {
+    padding: 12px 0px 12px;
+    display: flex;
+    align-items: center;
+}
+
+.search_list_writer > img {
+    height: 24px;
+    width: 24px;
+    border-radius: 26px;
+    padding: 0px;
+}
+
+.search_list_comment-content {
+    width: 700px;
+    margin-bottom: 8px;
+}
+
+.search_list_info {
+    display: flex;
+    margin-bottom: 8px;
+}
+
+.search_list_relative_contents {
+    display: flex;
+    align-items: center;
+}
+
+.search_list_relative_contents > img {
+    height: 28px;
+    width: 52px;
+    border-radius: 2px;
+}
+
+.search_list_dropdown > button {
+    height: 28px;
+    width: 500px;
+
+}

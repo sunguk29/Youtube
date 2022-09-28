@@ -1,0 +1,3 @@
+function inspectLogin() {
+    return true;
+}

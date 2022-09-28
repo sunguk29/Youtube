@@ -1,0 +1,27 @@
+:root {
+
+}
+
+/** Font Register */
+
+/** Font Family */
+
+* {
+    font-family: sans-serif;
+}
+
+div, span, input, textarea, b, h1, h2, h3, h4, h5, h6, a, p {
+    font-family: sans-serif;
+}
+
+/** Font Set */
+.font-bold-normal {
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 24px;
+}
+
+/** Bootstrap Initialize */
+p {
+    margin-bottom: 0;
+}
