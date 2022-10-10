@@ -3,5 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.HomeMapper">
-
+        <insert id="videoInsert" useGeneratedKeys="true" keyProperty="no"  parameterType="Video">
+            insert into video
+            (no, type, user_no, thumbnail, views, reg_datetime, update_datetime,
+             likes, dislikes, title, description, time, video_file)
+            values(1, 'game', 1, '사진경로', 0, '2022-10-10', '2020-10-10', 0, 0, '제목테스트', '내용테스트', '20:00', '비디오경로' );
+        </insert>
 </mapper>

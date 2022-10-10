@@ -21,13 +21,14 @@ public class HomeRestController {
 
     private final HomeService homeService;
 
-    @PostMapping("/videoInsert.json")
+    @PostMapping("/test/main")
     public ResponseEntity videoInsert(HttpServletRequest request, Video video) {
         Message message = new Message();
         //ArrayList<String> strings = new ArrayList<>();
         //strings.add("blahblah");
         message.put("status", true);
         int videoInsert = HomeService.videoInsert(video);
+
         //message.put("strings", strings);
         return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
 

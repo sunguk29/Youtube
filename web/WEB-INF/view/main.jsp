@@ -49,6 +49,7 @@
   <title>Youtube Modal</title>
 </head>
 
+
 <style>
   .btn:focus, .btn:active {
     outline: none !important;
@@ -1833,7 +1834,7 @@
                 <a style="position: absolute; font-size: 13px; margin-left: 36px; top: 19px;">자세히 알아보기</a>
               </div>
               <div class="row" style="margin-top: 20px;">
-                <input type="file" accept="image/jpeg,.txt" class="modal_thumbnail" name="thumbnail"/>
+                <input type="file" accept="image/jpeg,.txt" class="modal_thumbnail" name="thumbnail_file"/>
                 <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
                 <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
                 <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
@@ -1863,7 +1864,7 @@
               </video>
               <div class="modal_video_desc">
                 <div style="margin-top: 20px; margin-left: 15px;">
-                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select" name="videoFile"/>
+                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select" name="video_file"/>
                 </div>
                 <div style="display:flex; flex-direction: row">
                   <div style="display:flex; flex-direction: column; margin-left: 15px; margin-top: 20px;">
@@ -1881,7 +1882,7 @@
           </div>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">저장</button>
+          <button type="button" class="btn btn-primary" id="saveBtn">저장</button>
         </div>
       </div>
     </div>
@@ -2162,7 +2163,7 @@
 
   titleEle.addEventListener(`keyup`, function () {
     var countTitleEle = this.value.length;
-    console.log(countTitleEle)
+
     document.querySelector(`.count_title`).innerHTML = countTitleEle + "/100";
 
 
@@ -2179,7 +2180,7 @@
 
   descEle.addEventListener(`keyup`, function () {
     var countDescEle = this.value.length;
-    console.log(countDescEle)
+
     document.querySelector(`.count_desc`).innerHTML = countDescEle + "/5000";
 
     // 글자수 넘어가면 못적게
@@ -2193,24 +2194,30 @@
 
   }
 
-  let form = document.getElementById('insertModalForm');
-  const formData = new FormData(form);
-  const fileField = document.querySelector('input[type="file"]');
+  $('#saveBtn').click(function(){
+    alert('hi');
 
-  formData.append('username', 'abc123');
-  formData.append('avatar', fileField.files[0]);
+    let form = document.getElementById('insertModalForm');
+    const formData = new FormData(form);
+    const fileField = document.querySelector('input[type="file"]');
 
-  fetch('/videoInsert.json', {
-    method: 'PUT',
-    body: formData,
+    formData.append('username', 'abc123');
+    formData.append('avatar', fileField.files[0]);
+
+    fetch("/test/main", {
+      method: 'POST',
+      body: formData,
+    })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log('성공:', result.valueOf());
+            })
+            .catch((error) => {
+              console.error('실패:', error);
+            });
   })
-          .then((response) => response.json())
-          .then((result) => {
-            console.log('성공:', result);
-          })
-          .catch((error) => {
-            console.error('실패:', error);
-          });
+
+
 
 
 

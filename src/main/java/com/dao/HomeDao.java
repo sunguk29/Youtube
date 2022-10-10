@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @RequiredArgsConstructor
 public class HomeDao {
 
-    private final HomeMapper homeMapper;
-
-
+    public static void videoInsert(Video video) {
+        HomeMapper.videoInsert(video);
+    }
 }

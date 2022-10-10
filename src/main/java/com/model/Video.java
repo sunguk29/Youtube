@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
 import org.joda.time.DateTime;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @Data
@@ -26,4 +27,7 @@ public class Video {
     private String description;
     private String time;
     private String videoFile;
+    private MultipartFile thumbnail_file;
+    private MultipartFile video_file;
+
 }
