@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-         pageEncoding="utf-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,6 +6,15 @@
   <meta charset="utf-8">
   <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+  <!--      드롭다운 안되서 추가 추가하니 됨 -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+
+
+
+
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet"
@@ -140,7 +148,13 @@
   }
 
   .left-side-bar {
-    position: fixed; top: 56px; left: 0; z-index: 5; width: 240px; min-height: 100vh; height: 100%;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    z-index: 5;
+    width: 240px;
+    min-height: 100vh;
+    height: 100%;
 
   }
 
@@ -368,6 +382,10 @@
 
   /*모달*/
 
+  .modal {
+    z-index: 51;
+  }
+
   .make_video {
     position: absolute;
     left: 1050px;
@@ -394,6 +412,10 @@
   .modal-title {
     font-size: 20px;
     font-weight: 500;
+    width: 680px;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+    overflow:hidden
   }
 
   .announce {
@@ -419,13 +441,15 @@
   /*  height: 80px;*/
   /*}*/
 
-  .modal_fixed_contents {
-    height: 64px;
-    align-items: center;
-    text-align: center;
-  }
+  /*.modal_fixed_contents {*/
+  /*  height: 64px;*/
+  /*  align-items: center;*/
+  /*  text-align: center;*/
+  /*}*/
 
   .modal_body_contents_containner {
+    top: 0;
+    left: 0;
     width: 99%;
     height: 450px;
     /*max-height: 100%;*/
@@ -467,7 +491,8 @@
   }
 
   .contents_right {
-    /*background-color: #1c7430;*/
+    top: 0;
+    left: 0;
     width: 370px;
     height: 370px;
     margin-left: 10px;
@@ -488,6 +513,19 @@
     position: absolute;
     width: 640px;
     height: 110px;
+    top: 0;
+    left: 0;
+    resize: none;
+  }
+
+  .count_title {
+    position: absolute;
+    top: 80px;
+    left: 466px;
+    width: 150px;
+    height: 20px;
+    text-align: right;
+    z-index: 50;
   }
 
   .desc {
@@ -495,6 +533,19 @@
     margin-top: 10px;
     width: 640px;
     height: 160px;
+    top: 0;
+    left: 0;
+    resize: none;
+  }
+
+  .count_desc {
+    position: absolute;
+    top: 135px;
+    left: 466px;
+    width: 150px;
+    height: 20px;
+    text-align: right;
+    z-index: 50;
   }
 
   .img {
@@ -515,6 +566,17 @@
     width: 260px;
     height: 48px;
     margin-top: 15px;
+  }
+
+  .playlist_select_btn:hover, .playlist_select_btn:focus, .playlist_select_btn:active  {
+    background-color: #00000000;
+    color: black;
+    box-shadow: none;
+  }
+
+  .playlist_select_btn {
+    background-color: #00000000;
+    color: black;
   }
 
   .modal_thumbnail {
@@ -542,6 +604,20 @@
     width: 85px;
     height: 30px;
   }
+
+  .modal_background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .2);
+    width: 100%;
+    height: 100%;
+    z-index: 50;
+    display: none;
+  }
+
+
+
 
 
 
@@ -586,6 +662,11 @@
     </div>
   </div>
 </header>
+
+<!--    모달 background-->
+
+<div class="modal_background"></div>
+
 <div class="left-side-bar">
 
   <div class="one">
@@ -1703,12 +1784,13 @@
 
 
   <!--      모달1-->
+  <form action="videoInsert.do" method="post" enctype="multipart/form-data" id="insertModalForm">
 
-  <div class="modal" tabindex="-1">
+  <div class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Sample1</h5>
+          <h5 class="modal-title">sample1</h5>
           <div class="announce">비공개로 저장됨</div>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
         </div>
@@ -1721,18 +1803,37 @@
 
             <div class="contents_left">
               <div style="position: relative">
-                <textarea class="title" placeholder="제목 (필수항목)"></textarea>
+                <textarea class="title" placeholder="제목 (필수항목)" type="text" name="title"></textarea>
+                <div class="count_title"></div>
               </div>
               <div style="position: relative; margin-top: 120px;">
-                <textarea class="desc" placeholder="설명"></textarea>
+                <textarea class="desc" placeholder="설명"  type="text" name="description"></textarea>
+                <div class="count_desc"></div>
               </div>
-              <div style="margin-top: 300px; font-size: 15px;">미리보기 이미지</div>
+              <div>
+                <select style="position: relative; margin-top: 180px;" id="type" name="type" onchange="typeSelect(this)">
+                  <option value="게임">게임</option>
+                  <option value="과학기술">과학기술</option>
+                  <option value="교육">교육</option>
+                  <option value="노하우/스타일">노하우/스타일</option>
+                  <option value="뉴스/정치">뉴스/정치</option>
+                  <option value="비영리/사회활동">비영리/사회활동</option>
+                  <option value="스포츠">스포츠</option>
+                  <option value="애완동물/동물">애완동물/동물</option>
+                  <option value="엔터테이먼트">엔터테이먼트</option>
+                  <option value="여행/이벤트">여행/이벤트</option>
+                  <option value="영화/애니메이션">영화/애니메이션</option>
+                  <option value="음악">음악</option>
+                  <option value="인물/블로그">인물/블로그</option>
+                </select>
+              </div>
+              <div style="margin-top: 10px; font-size: 15px;">미리보기 이미지</div>
               <div style="margin-top: 6px; position:relative;">
                 <div style="font-size: 13px">동영상의 내용을 알려주는 사진을 선택하거나 업로드하세요. 시청자의 시선을 사로잡을만한 이미지를 사용해 보세요.</div>
                 <a style="position: absolute; font-size: 13px; margin-left: 36px; top: 19px;">자세히 알아보기</a>
               </div>
               <div class="row" style="margin-top: 20px;">
-                <input type="file" accept="image/jpeg,.txt" class="modal_thumbnail"/>
+                <input type="file" accept="image/jpeg,.txt" class="modal_thumbnail" name="thumbnail"/>
                 <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
                 <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
                 <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
@@ -1743,13 +1844,16 @@
                 <div style="font-size: 13px">동영상의 내용을 알려주는 사진을 선택하거나 업로드하세요. 시청자의 시선을 사로잡을만한 이미지를 사용해 보세요.</div>
                 <a style="position: absolute; font-size: 13px; margin-left: 36px; top: 19px;">자세히 알아보기</a>
               </div>
-              <select class="playlist_select">
-                <option>&nbsp;선택</option>
-                <option>&nbsp;선택</option>
-                <option>&nbsp;선택</option>
-                <option>&nbsp;선택</option>
-                <option>&nbsp;선택</option>
-              </select>
+              <div class="dropdown playlist_select">
+                <button class="btn btn-secondary dropdown-toggle playlist_select_btn" type="button" id="dropdownMenu2" data-bs-auto-close="outside" data-bs-toggle="dropdown" aria-expanded="false">
+                  선택
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                  <li><button class="dropdown-item" type="button">재생목록1</button></li>
+                  <li><button class="dropdown-item" type="button">재생목록2</button></li>
+                  <li><button class="dropdown-item" type="button">재생목록3</button></li>
+                </ul>
+              </div>
             </div>
 
 
@@ -1759,7 +1863,7 @@
               </video>
               <div class="modal_video_desc">
                 <div style="margin-top: 20px; margin-left: 15px;">
-                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select"/>
+                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select" name="videoFile"/>
                 </div>
                 <div style="display:flex; flex-direction: row">
                   <div style="display:flex; flex-direction: column; margin-left: 15px; margin-top: 20px;">
@@ -1782,7 +1886,7 @@
       </div>
     </div>
   </div>
-
+  </form>
 
 
 
@@ -2013,6 +2117,12 @@
 
 
   modalBtn.addEventListener('click', function () {
+
+    // 모달 뒷배경
+    $(`.modal_background`).css('display', 'block')
+
+    // 모달
+
     $('.modal').css('display', 'block')
 
     $('html, body').css({'overflow': 'hidden', 'height': '100%'}); // 모달팝업 중 html,body의 scroll을 hidden시킴
@@ -2022,9 +2132,6 @@
 
       return false;
     });
-
-    // $(`body`).css(`background-color`, 'black')
-    // $(`.header_layout`).css(`background-color`, 'black')
   })
 
 
@@ -2033,8 +2140,77 @@
     $('.modal').css('display', 'none')
     $('html, body').css({'overflow': 'auto', 'height': '100%'}); //scroll hidden 해제
     $('#element').off('scroll touchmove mousewheel'); // 터치무브 및 마우스휠 스크롤 가능
+    $(`.modal_background`).css('display', 'none')
+  })
+
+
+  // 제목 적을때마다 헤더 바꾸기
+
+  var titleEle = document.querySelector(`.title`)
+
+  titleEle.addEventListener(`input`, function (e) {
+    document.querySelector(`.modal-title`).innerHTML = ''
+    document.querySelector(`.modal-title`).innerHTML = e.target.value
+
+    if(e.target.value === '') {
+      document.querySelector(`.modal-title`).innerHTML = 'sample1'
+    }
 
   })
+
+  // 글자수 표시
+
+  titleEle.addEventListener(`keyup`, function () {
+    var countTitleEle = this.value.length;
+    console.log(countTitleEle)
+    document.querySelector(`.count_title`).innerHTML = countTitleEle + "/100";
+
+
+    // 글자수 넘어가면 못적게
+    if (countTitleEle > 100) {
+      $(this).val($(this).val().substring(0, 100))
+      $('.count_title').html("100/100")
+    }
+  })
+
+  // 글자수 표시
+
+  var descEle = document.querySelector(`.desc`)
+
+  descEle.addEventListener(`keyup`, function () {
+    var countDescEle = this.value.length;
+    console.log(countDescEle)
+    document.querySelector(`.count_desc`).innerHTML = countDescEle + "/5000";
+
+    // 글자수 넘어가면 못적게
+    if (countDescEle > 5000) {
+      $(this).val($(this).val().substring(0, 5000))
+      $('.count_desc').html("5000/5000")
+    }
+  })
+
+  function typeSelect(e){
+
+  }
+
+  let form = document.getElementById('insertModalForm');
+  const formData = new FormData(form);
+  const fileField = document.querySelector('input[type="file"]');
+
+  formData.append('username', 'abc123');
+  formData.append('avatar', fileField.files[0]);
+
+  fetch('/videoInsert.json', {
+    method: 'PUT',
+    body: formData,
+  })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log('성공:', result);
+          })
+          .catch((error) => {
+            console.error('실패:', error);
+          });
 
 
 
