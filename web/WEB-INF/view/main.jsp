@@ -1786,6 +1786,7 @@
 
   <!--      모달1-->
   <form action="videoInsert.do" method="post" enctype="multipart/form-data" id="insertModalForm">
+    <input type="hidden" name="userNo" value="1">
 
   <div class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">

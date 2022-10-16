@@ -16,11 +16,11 @@ import org.springframework.web.multipart.MultipartFile;
 public class Video {
     private int no;
     private String type;
-    private User userNo;
+    private int userNo;
     private String thumbnail;
     private int views;
-    private DateTime regDatetime;
-    private DateTime updateDatetime;
+    private DateTime reg_datetime;
+    private DateTime update_datetime;
     private int likes;
     private int dislikes;
     private String title;
