@@ -2,14 +2,18 @@ package com.dao;
 
 import com.mapper.HomeMapper;
 import com.model.Video;
-import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 @Repository
-@RequiredArgsConstructor
 public class HomeDao {
 
-    public static void videoInsert(Video video) {
-        HomeMapper.videoInsert(video);
+    private HomeMapper mapper;
+    private HomeDao(SqlSession sqlSession){
+        this.mapper = sqlSession.getMapper(HomeMapper.class);
+    }
+
+    public void insertVideo(Video video) {
+        mapper.insertVideo(video);
     }
 }

@@ -11,8 +11,9 @@ public class HomeService {
 
     private final HomeDao homeDao ;
 
-     public static int videoInsert(Video video) {
-        HomeDao.videoInsert(video);
-         return 0;
-     }
+    public int insertVideo(Video video) {
+        homeDao.insertVideo(video);
+        return video.getNo();
+
+    }
 }

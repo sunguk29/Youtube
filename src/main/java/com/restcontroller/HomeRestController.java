@@ -27,7 +27,7 @@ public class HomeRestController {
         //ArrayList<String> strings = new ArrayList<>();
         //strings.add("blahblah");
         message.put("status", true);
-        int videoInsert = HomeService.videoInsert(video);
+        int videoNum = homeService.insertVideo(video);
         log.info(String.valueOf(video));
         //message.put("strings", strings);
         return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);

@@ -14,8 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class TestController {
     private final TestService testService;
     public static void main(String[] args) {
-        try {
-            System.out.println(new EncryptionService().encryptAES("8080", false));
+        try { //jdbc:mysql://localhost:3306/youtube?useUnicode=true&serverTimezone=Asia/Seoul
+            System.out.println(new EncryptionService().encryptAES("jdbc:mysql://localhost:3306/youtube?useUnicode=true&serverTimezone=Asia/Seoul", false));
         } catch (Exception e) {
             e.printStackTrace();
         }
