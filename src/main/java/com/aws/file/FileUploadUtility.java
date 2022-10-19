@@ -16,7 +16,6 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.context.ConfigurableWebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,7 +38,7 @@ public class FileUploadUtility {
      * LocalFileUploadStrategy or awsFileUploadStrategy 중 선택
      */
     @Autowired
-    public FileUploadUtility(@Qualifier("AWSFileUploadStrategy") FileUploadStrategy fileUploadStrategy,
+    public FileUploadUtility(@Qualifier("LocalFileUploadStrategy") FileUploadStrategy fileUploadStrategy,
                              ConfigurableWebApplicationContext ctx) {
         // Property Config 에서 무조건 걸어주기 떄문에 properties 세팅만 잘 되어있다면 오류 발생 X
         upload_path = (String) ctx.getEnvironment().getPropertySources().get("path_props").getProperty("UPLOAD_PATH");
