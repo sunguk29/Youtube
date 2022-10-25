@@ -5,6 +5,8 @@ import com.model.Video;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+
 @Repository
 public class HomeDao {
 
@@ -15,5 +17,10 @@ public class HomeDao {
 
     public void insertVideo(Video video) {
         mapper.insertVideo(video);
+    }
+
+
+    public ArrayList<Video> selectVideoList(Video video) {
+        return mapper.selectVideoList(video);
     }
 }

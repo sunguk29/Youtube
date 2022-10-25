@@ -7,9 +7,14 @@
         insert into video
         (type, user_no, thumbnail, views, reg_datetime, update_datetime,
          likes, dislikes, title, description, time, video_file)
-        values ( #{type}, #{userNo}, #{thumbnail}, #{views}, now(), now(), #{likes},
+        values (#{type}, #{userNo}, #{thumbnail}, #{views}, now(), now(), #{likes},
                 #{dislikes}, #{title}, #{description}, #{time}, #{videoFile})
     </insert>
 
+    <select id="selectVideoList" resultType="com.model.Video">
+        SELECT *, video_file AS videoFile
+        FROM VIDEO
+        ORDER BY NO DESC
+    </select>
 
 </mapper>
