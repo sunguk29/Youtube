@@ -1,6 +1,7 @@
 package com.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.model.common.MFile;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -29,5 +30,7 @@ public class Video {
     private String videoFile;
     private MultipartFile thumbnail_file;
     private MultipartFile video_file;
+    private MFile thumbnail_mfile;
+    private MFile video_mfile;
 
 }
