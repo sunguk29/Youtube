@@ -108,4 +108,6 @@ public class FileUploadUtility {
     public void localMultiPartDelete(PartFile part_file_data) {
         Folder.deleteFile(upload_path + part_file_data.getFile_name());
     }
+
+
 }

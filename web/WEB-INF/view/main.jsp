@@ -278,7 +278,7 @@
 
   .videoTimeBackGround {
     position: absolute;
-    top: 150px;
+    top: 176px;
     left: 200px;
     z-index: 2;
     background-color: black;
@@ -559,7 +559,7 @@
   }
 
   .contents-img {
-    width: 165px;
+    width: 160px;
     height: 70px;
     padding-left: 15px;
   }
@@ -984,11 +984,11 @@
                 <div style="font-size: 13px">동영상의 내용을 알려주는 사진을 선택하거나 업로드하세요. 시청자의 시선을 사로잡을만한 이미지를 사용해 보세요.</div>
                 <a style="position: absolute; font-size: 13px; margin-left: 36px; top: 19px;">자세히 알아보기</a>
               </div>
-              <div class="row" style="margin-top: 20px;">
-                <input type="file" accept="image/jpeg,.txt" class="modal_thumbnail" name="thumbnail_file"/>
-                <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
-                <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
-                <div class="img col-3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
+              <div class="row img_input" style="margin-top: 20px;">
+                <input type="file" accept="image/jpeg,.txt" class="modal_thumbnail" name="thumbnail_file" onchange="imgPreview()" multiple/>
+                <div class="img col-3 thumbnail_1"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
+                <div class="img col-3 thumbnail_2"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
+                <div class="img col-3 thumbnail_3"><img src="/resources/css/img/dog.png" class="contents-img" alt="..."></div>
               </div>
 
               <div style="margin-top: 30px; font-size: 15px;">재생목록</div>
@@ -1015,17 +1015,17 @@
               </video>
               <div class="modal_video_desc">
                 <div style="margin-top: 20px; margin-left: 15px;">
-                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select" name="video_file" />
+                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select" name="video_file" onchange="videoPreview()" />
                 </div>
                 <div style="display:flex; flex-direction: row">
                   <div style="display:flex; flex-direction: column; margin-left: 15px; margin-top: 20px;">
                     <div style=" font-size: 12px;">동영상 링크</div>
-                    <a>https://youtu.be/frc4JDgZZKk</a>
+                    <a class="video_link">https://youtu.be/frc4JDgZZKk</a>
                   </div>
                   <i class="fa-solid fa-copy fa-2x" style="margin-left: auto; margin-right: 25px; margin-top: 20px;"></i>
                 </div>
                 <div style=" font-size: 12px; margin-left: 15px; margin-top: 20px;">파일 이름</div>
-                <div style=" font-size: 15px; margin-left: 15px; font-weight: 500;">sample.mp4</div>
+                <div class="video_name" style=" font-size: 15px; margin-left: 15px; font-weight: 500;">sample.mp4</div>
               </div>
             </div>
 
@@ -1367,6 +1367,109 @@
               console.error('실패:', error);
             });
   })
+
+
+  function imgPreview() {
+
+    let input = document.querySelector('.modal_thumbnail');
+    let multipleContainer = document.querySelector('.img_input');
+
+    document.querySelector('.thumbnail_1').remove();
+    document.querySelector('.thumbnail_2').remove();
+    document.querySelector('.thumbnail_3').remove();
+
+
+
+    if(input.files && input.files.length < 4) {
+
+      // 이미지 파일 검사 (생략)
+      console.log(input.files)
+      // 유사배열을 배열로 변환 (forEach문으로 처리하기 위해)
+      const fileArr = Array.from(input.files)
+      // const $colDiv1 = document.createElement("div")
+      // const $colDiv2 = document.createElement("div")
+      // $colDiv1.classList.add("column")
+      // $colDiv2.classList.add("column")
+      fileArr.forEach((file, index) => {
+
+
+
+
+        const reader = new FileReader()
+
+        const $imgDiv = document.createElement("div")
+        const $img = document.createElement("img")
+
+        $imgDiv.classList.add("img")
+        $imgDiv.classList.add("col-3")
+        $img.classList.add("contents-img")
+
+
+        $imgDiv.appendChild($img)
+        reader.onload = e => {
+          $img.src = e.target.result
+
+          $imgDiv.style.width = ($img.naturalWidth) * 0.2 + "px"
+        }
+
+        reader.readAsDataURL(file)
+        multipleContainer.appendChild($imgDiv)
+
+
+      })
+
+    } else {
+      alert("알맞은 이미지의 개수를 반영하세요")
+    }
+
+  }
+
+
+
+function videoPreview() {
+
+  let input = document.querySelector('.modal_video_select');
+  let file = input.files[0];
+  let formData = new FormData();
+  formData.append('video_file', file);
+  fetch("/testPreview", {
+    method: 'POST',
+    body: formData,
+  })
+          .then((response) => response.json())
+          .then((result) => {
+            console.log('성공:', result.valueOf());
+
+            document.querySelector('.contents_right > video').remove();
+
+            let previewVideo = document.createElement('video')
+            previewVideo.setAttribute('style', 'width:360px; margin-left:20px;')
+            previewVideo.setAttribute('controls', '')
+
+            let previewContents = `
+                <source class="contents_right_video" src="` + result.data.file.url + `" type="video/mp4">
+              `
+
+            previewVideo.innerHTML = previewContents;
+            document.querySelector('.contents_right').prepend(previewVideo);
+
+            // 동영상 링크
+            document.querySelector('.video_link').innerHTML = ''
+            document.querySelector('.video_link').innerHTML = result.data.file.url;
+
+            console.log(result.data.file.name)
+
+            document.querySelector('.video_name').innerHTML = ''
+            document.querySelector('.video_name').innerHTML = result.data.file.name;
+
+          })
+          .catch((error) => {
+            console.error('실패:', error);
+          })
+
+
+
+}
 
 
 
