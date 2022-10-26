@@ -1861,11 +1861,11 @@
 
             <div class="contents_right">
               <video style="width: 360px; margin-left: 20px;" controls>
-                <source src="/resources/css/img/sample.mp4" type="video/mp4">
+                <source class="contents_right_video" src="/resources/css/img/sample.mp4" type="video/mp4">
               </video>
               <div class="modal_video_desc">
                 <div style="margin-top: 20px; margin-left: 15px;">
-                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select" name="video_file"/>
+                  <input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" class="modal_video_select" name="video_file" />
                 </div>
                 <div style="display:flex; flex-direction: row">
                   <div style="display:flex; flex-direction: column; margin-left: 15px; margin-top: 20px;">
@@ -2200,10 +2200,10 @@
 
     let form = document.getElementById('insertModalForm');
     const formData = new FormData(form);
-    const fileField = document.querySelector('input[type="file"]');
+    // const fileField = document.querySelector('input[type="file"]');
 
-    formData.append('username', 'abc123');
-    formData.append('avatar', fileField.files[0]);
+    // formData.append('username', 'abc123');
+    // formData.append('avatar', fileField.files[0]);
 
     fetch("/test/main", {
       method: 'POST',
@@ -2217,6 +2217,16 @@
               console.error('실패:', error);
             });
   })
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.AdvertiseMapper">
+<!--    <insert id="insertAd" parameterType="com.model.Advertise" useGeneratedKeys="true" keyProperty="no">-->
+<!--        insert into video-->
+<!--        (type, user_no, thumbnail, views, reg_datetime, update_datetime,-->
+<!--         likes, dislikes, title, description, time, video_file)-->
+<!--        values ( #{type}, #{userNo}, #{thumbnail}, #{views}, now(), now(), #{likes},-->
+<!--                #{dislikes}, #{title}, #{description}, #{time}, #{videoFile})-->
+<!--    </insert>-->
+
+
+</mapper>
