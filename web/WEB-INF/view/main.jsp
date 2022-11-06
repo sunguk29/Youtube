@@ -865,8 +865,10 @@
           </div>
           <div class="card-body">
             <div class="media">
+              <a onclick="video_select('${item.no}');" class="video_select">
               <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
                    style="width: 36px; height: 36px; position: relative; z-index: 1;">
+              </a>
               <div class="media-body">
                 <div class="media_body_more">
                   <h6 class="mt-0">${item.title}&nbsp;</h6>
@@ -1052,7 +1054,16 @@
 <script>
   $(document).ready(function () {
     console.log('document ready');
+
   });
+
+
+  function video_select(no){
+
+    document.querySelector('video_select');
+
+    //action = "value='/videoView/selectVideoDetail.do'/>";
+  }
 
   let text = '';
   const btn = document.querySelector('.input-group-text')
@@ -1466,6 +1477,8 @@ function videoPreview() {
           .catch((error) => {
             console.error('실패:', error);
           })
+
+
 
 
 
