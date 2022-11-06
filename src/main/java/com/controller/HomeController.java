@@ -43,21 +43,13 @@ public class HomeController {
             String dbHour = Integer.toString(hour);
             String dbSecond = Integer.toString(second);
 
-            if(realMinute < 10) {
-                dbMinute = "0" + realMinute;
-            }
-
-            if(hour < 10){
-                dbHour = "0" + hour;
-            }
-
             if(second < 10){
                 dbSecond = "0" + second;
             }
 
             String videoTimed;
 
-            if(dbHour.equals("00")){
+            if(dbHour.equals("00") || dbHour.equals("0")){
                  videoTimed = dbMinute + ":" + dbSecond;
             } else {
                  videoTimed = dbHour + ":" + dbMinute + ":" + dbSecond;
