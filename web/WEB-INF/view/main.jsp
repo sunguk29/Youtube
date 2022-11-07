@@ -58,6 +58,14 @@
     background-color: black; !important;
   }
 
+  .col {
+    overflow-y: hidden;
+    overflow-x: hidden;
+    position: relative;
+    padding-right: 8px;
+    padding-left: 8px;
+  }
+
 
 
   /* 검색 */
@@ -279,7 +287,7 @@
   .videoTimeBackGround {
     position: absolute;
     top: 176px;
-    left: 200px;
+    left: 214px;
     z-index: 2;
     background-color: black;
     border: 1px solid #000;
@@ -320,11 +328,15 @@
   }
 
   .video_dropdown {
+
     width: 25px;
   }
 
+
+
   .media_body_more {
     display: flex;
+    width: 100%;
   }
 
   .card-body {
@@ -349,7 +361,7 @@
 
   .media {
     left: -20px;
-    width: 254px;
+    width: 270px;
     height: 94px;
     position: relative;
     display: flex;
@@ -622,7 +634,46 @@
     height: 200px;
   }
 
+  .mt-0 {
+    width: 210px;
+  }
 
+  media-body {
+    width: 100%;
+  }
+
+  .loadingBox > .dim {
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,.1);
+  }
+
+  .loadingBox > .circle {
+    position: absolute;
+    left:50%;
+    top:50%;
+    transform:translate(-50%, -50%);
+    width:40px;
+    height:40px;
+    border:10px solid #fff;
+    border-top:10px solid black;
+    border-radius:50em;
+    animation-name:spinCircle;
+    animation-duration:.8s;
+    animation-iteration-count:infinite;
+  }
+
+  @keyframes spinCircle {
+    from {
+      transform:translate(-50%, -50%) rotate(0);
+    }
+    to {
+      transform:translate(-50%, -50%) rotate(360deg);
+    }
+  }
 
 
 
@@ -850,16 +901,55 @@
 
 </div>
 <form action="mainVideo.do" method="get">
-<div class="content-wrapper container-fluid main_viedo2">
+  <div class="content-wrapper container-fluid main_viedo2">
 
-  <div class="row row-cols-5">
-    <c:forEach items="${videoList}" var="item" varStatus="status">
+    <div class="row row-cols-5">
+      <c:forEach items="${videoList}" var="item" begin="0" end="13" varStatus="status">
+        <div class="col">
+          <div class="card-container">
+            <div class="main_video_container">
+              <img src="${item.thumbnail_mfile.url}" class="card-img-top" alt="...">
+              <div class="videoTimeBackGround">
+                <span class="videoTime" style="color: white;">${item.time}</span>
+                <span class="videoHover" style="font-size:10px;"></span>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="media">
+                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+                     style="width: 36px; height: 36px; position: relative; z-index: 1;">
+                <div class="media-body">
+                  <div class="media_body_more">
+                    <h6 class="mt-0">${item.title}&nbsp;</h6>
+                    <div class="videoMore1">
+                      <div>
+                        <div class="dropdown dropleft">
+                          <div class="dropdown video_dropdown dropdownMenuButton " data-toggle="dropdown" aria-haspopup="false" aria-expanded="false">
+                            <i class="fa fa-ellipsis-vertical fa-lg"></i>
+                          </div>
+                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
+                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                    <%--채널이름 필요할거같음--%>
+                  <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
+                  <p class="video_info" style="font-size: 14px;"> 조회수 ${item.views} ·${item.reg_datetime}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </c:forEach>
       <div class="col">
         <div class="card-container">
           <div class="main_video_container">
-            <img src="${item.thumbnail_mfile.url}" class="card-img-top" alt="...">
+            <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">
             <div class="videoTimeBackGround">
-              <span class="videoTime" style="color: white;">${item.time}</span>
+              <span class="videoTime" style="color: white;">20:00</span>
               <span class="videoHover" style="font-size:10px;"></span>
             </div>
           </div>
@@ -869,12 +959,12 @@
                    style="width: 36px; height: 36px; position: relative; z-index: 1;">
               <div class="media-body">
                 <div class="media_body_more">
-                  <h6 class="mt-0">${item.title}&nbsp;</h6>
+                  <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>
                   <div class="videoMore1">
                     <div>
                       <div class="dropdown">
                         <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          <i class="fa fa-ellipsis-vertical fa-2x"></i>
+                          <i class="fa fa-ellipsis-vertical fa-lg"></i>
                         </div>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                           <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
@@ -884,59 +974,24 @@
                     </div>
                   </div>
                 </div>
-                <%--채널이름 필요할거같음--%>
                 <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-                <p class="video_info" style="font-size: 14px;"> 조회수 ${item.views} ·${item.reg_datetime}</p>
+                <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>
               </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </c:forEach>
-    <div class="col">
-      <div class="card-container">
-        <div class="main_video_container">
-          <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">
-          <div class="videoTimeBackGround">
-            <span class="videoTime" style="color: white;">20:00</span>
-            <span class="videoHover" style="font-size:10px;"></span>
-          </div>
-        </div>
-        <div class="card-body">
-          <div class="media">
-            <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                 style="width: 36px; height: 36px; position: relative; z-index: 1;">
-            <div class="media-body">
-              <div class="media_body_more">
-                <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>
-                <div class="videoMore1">
-                  <div>
-                    <div class="dropdown">
-                      <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-vertical fa-2x"></i>
-                      </div>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                        <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-              <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="loadingBox" style="width: 100%; height: 60px; overflow: hidden; margin-bottom: 100px; position: relative; display: none">
+      <div class="dim"></div>
+      <div class="circle"></div>
+    </div>
   </div>
-</div>
 </form>
 
-  <!--      모달1-->
-  <form action="videoInsert.do" method="post" enctype="multipart/form-data" id="insertModalForm">
-    <input type="hidden" name="userNo" value="1">
+<!--      모달1-->
+<form action="videoInsert.do" method="post" enctype="multipart/form-data" id="insertModalForm">
+  <input type="hidden" name="userNo" value="1">
 
   <div class="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -1038,7 +1093,7 @@
       </div>
     </div>
   </div>
-  </form>
+</form>
 
 
 
@@ -1050,6 +1105,11 @@
 
 <script src="https://unpkg.com/@api.video/video-uploader" defer></script>
 <script>
+
+  var postData = {
+    lastNo : 19
+  }
+
   $(document).ready(function () {
     console.log('document ready');
   });
@@ -1064,201 +1124,146 @@
 
 
 
-  var count = 5
+  var count = 14
+
+
+
+  var isScroll = true
+
+
   window.onscroll = function () {
-    if((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-      var toAdd = document.createElement('div')
-      toAdd.classList.add('row')
-      toAdd.classList.add('row-cols-5')
-      var contents_card = `<div class="col">
-          <div class="card-container">
-            <div class="main_video_container">
-              <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">
-              <div class="videoTimeBackGround">
-                <span class="videoTime" style="color: white;">20:00</span>
-                <span class="videoHover" style="font-size:10px;"></span>
-              </div>
+
+
+    if(postData.lastNo == 999) {
+
+      console.log("끝끝끝끝끝끝끝끝끝끝끝")
+
+    } else  {
+      if (isScroll){
+        isScroll = false
+      if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+      waitEle()
+
+
+      fetch("/getLastNo", {
+        method : "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept":"application/json"
+        },
+        body : JSON.stringify(postData),
+      }).then((response) => console.log("getLastNo 시작 : " + postData.lastNo));
+
+      fetch("/getinfinity")
+              .then(function (response) {
+                return response.json()
+              }).then(function (data) {
+
+        if(data.data.videoList.length < 5) {
+          postData.lastNo = 999;
+        } else {
+          postData.lastNo = data.data.videoList[4].no
+        }
+
+              console.log(data)
+
+
+
+         setTimeout(() => {
+
+           deleteWait()
+          createEle()
+           isScroll=true
+        },2000)
+
+
+
+
+        function createEle() {
+
+          var toAdd = document.createElement('div')
+          toAdd.classList.add('row')
+          toAdd.classList.add('row-cols-5')
+
+        console.log(postData.lastNo)
+
+        for (let i = 0; i < 5; i++) {
+          var a = document.createElement('div')
+          a.classList.add('col')
+          rendering(data.data.videoList[i])
+          toAdd.appendChild(a)
+
+        }
+
+        function rendering(videoList) {
+
+          a.innerHTML =  `
+
+      <div class="col">
+        <div class="card-container">
+          <div class="main_video_container">
+            <img src="` + videoList.thumbnail_mfile.url + `" class="card-img-top" alt="...">
+            <div class="videoTimeBackGround">
+              <span class="videoTime" style="color: white;">` + videoList.time + `</span>
+              <span class="videoHover" style="font-size:10px;"></span>
             </div>
-            <div class="card-body">
-              <div class="media">
-                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                     style="width: 36px; height: 36px; position: relative; z-index: 1;">
-                <div class="media-body">
-                  <div class="media_body_more">
-                    <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>
-                    <div class="videoMore1">
-                      <div>
-                        <div class="dropdown">
-                          <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical fa-2x"></i>
-                          </div>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                          </div>
+          </div>
+          <div class="card-body">
+            <div class="media">
+              <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+                   style="width: 36px; height: 36px; position: relative; z-index: 1;">
+              <div class="media-body">
+                <div class="media_body_more">
+                  <h6 class="mt-0"> ` + videoList.title + `&nbsp;</h6>
+                  <div class="videoMore1">
+                    <div>
+                      <div class="dropdown">
+                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          <i class="fa fa-ellipsis-vertical fa-lg"></i>
+                        </div>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                          <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
+                          <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-                  <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>
                 </div>
+                <%--채널이름 필요할거같음--%>
+                <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
+                <p class="video_info" style="font-size: 14px;"> 조회수 ` + videoList.views + ` · ` + videoList.reg_datetime + `</p>
               </div>
             </div>
           </div>
         </div>
-        <div class="col">
-          <div class="card-container">
-            <div class="main_video_container">
-              <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">
-              <div class="videoTimeBackGround">
-                <span class="videoTime" style="color: white;">20:00</span>
-                <span class="videoHover" style="font-size:10px;"></span>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="media">
-                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                     style="width: 36px; height: 36px; position: relative; z-index: 1;">
-                <div class="media-body">
-                  <div class="media_body_more">
-                    <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>
-                    <div class="videoMore1">
-                      <div>
-                        <div class="dropdown">
-                          <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical fa-2x"></i>
-                          </div>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-                  <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-container">
-            <div class="main_video_container">
-              <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">
-              <div class="videoTimeBackGround">
-                <span class="videoTime" style="color: white;">20:00</span>
-                <span class="videoHover" style="font-size:10px;"></span>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="media">
-                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                     style="width: 36px; height: 36px; position: relative; z-index: 1;">
-                <div class="media-body">
-                  <div class="media_body_more">
-                    <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>
-                    <div class="videoMore1">
-                      <div>
-                        <div class="dropdown">
-                          <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical fa-2x"></i>
-                          </div>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-                  <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-container">
-            <div class="main_video_container">
-              <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">
-              <div class="videoTimeBackGround">
-                <span class="videoTime" style="color: white;">20:00</span>
-                <span class="videoHover" style="font-size:10px;"></span>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="media">
-                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                     style="width: 36px; height: 36px; position: relative; z-index: 1;">
-                <div class="media-body">
-                  <div class="media_body_more">
-                    <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>
-                    <div class="videoMore1">
-                      <div>
-                        <div class="dropdown">
-                          <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical fa-2x"></i>
-                          </div>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-                  <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card-container">
-            <div class="main_video_container">
-              <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">
-              <div class="videoTimeBackGround">
-                <span class="videoTime" style="color: white;">20:00</span>
-                <span class="videoHover" style="font-size:10px;"></span>
-              </div>
-            </div>
-            <div class="card-body">
-              <div class="media">
-                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                     style="width: 36px; height: 36px; position: relative; z-index: 1;">
-                <div class="media-body">
-                  <div class="media_body_more">
-                    <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>
-                    <div class="videoMore1">
-                      <div>
-                        <div class="dropdown">
-                          <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical fa-2x"></i>
-                          </div>
-                          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-                  <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>`
-      toAdd.innerHTML = contents_card
-      document.querySelector('.content-wrapper').appendChild(toAdd)
+      </div>
+        `
+          document.querySelector('.content-wrapper').append(toAdd)
+
+
+        }
+        }
+
+
+
+  }).catch((error) => {
+    console.error('실패:', error);
+  });
+
+        }
     }
+}
+
+  function waitEle() {
+    document.querySelector('.loadingBox').style.display = "block"
+
   }
+
+  function deleteWait() {
+    document.querySelector('.loadingBox').style.display = "none"
+    document.querySelector('.content-wrapper').append(document.querySelector('.loadingBox'))
+  }
+
 
 
   // 모달
@@ -1426,50 +1431,50 @@
 
 
 
-function videoPreview() {
+  function videoPreview() {
 
-  let input = document.querySelector('.modal_video_select');
-  let file = input.files[0];
-  let formData = new FormData();
-  formData.append('video_file', file);
-  fetch("/testPreview", {
-    method: 'POST',
-    body: formData,
-  })
-          .then((response) => response.json())
-          .then((result) => {
-            console.log('성공:', result.valueOf());
+    let input = document.querySelector('.modal_video_select');
+    let file = input.files[0];
+    let formData = new FormData();
+    formData.append('video_file', file);
+    fetch("/testPreview", {
+      method: 'POST',
+      body: formData,
+    })
+            .then((response) => response.json())
+            .then((result) => {
+              console.log('성공:', result.valueOf());
 
-            document.querySelector('.contents_right > video').remove();
+              document.querySelector('.contents_right > video').remove();
 
-            let previewVideo = document.createElement('video')
-            previewVideo.setAttribute('style', 'width:360px; margin-left:20px;')
-            previewVideo.setAttribute('controls', '')
+              let previewVideo = document.createElement('video')
+              previewVideo.setAttribute('style', 'width:360px; margin-left:20px;')
+              previewVideo.setAttribute('controls', '')
 
-            let previewContents = `
+              let previewContents = `
                 <source class="contents_right_video" src="` + result.data.file.url + `" type="video/mp4">
               `
 
-            previewVideo.innerHTML = previewContents;
-            document.querySelector('.contents_right').prepend(previewVideo);
+              previewVideo.innerHTML = previewContents;
+              document.querySelector('.contents_right').prepend(previewVideo);
 
-            // 동영상 링크
-            document.querySelector('.video_link').innerHTML = ''
-            document.querySelector('.video_link').innerHTML = result.data.file.url;
+              // 동영상 링크
+              document.querySelector('.video_link').innerHTML = ''
+              document.querySelector('.video_link').innerHTML = result.data.file.url;
 
-            console.log(result.data.file.name)
+              console.log(result.data.file.name)
 
-            document.querySelector('.video_name').innerHTML = ''
-            document.querySelector('.video_name').innerHTML = result.data.file.name;
+              document.querySelector('.video_name').innerHTML = ''
+              document.querySelector('.video_name').innerHTML = result.data.file.name;
 
-          })
-          .catch((error) => {
-            console.error('실패:', error);
-          })
+            })
+            .catch((error) => {
+              console.error('실패:', error);
+            })
 
 
 
-}
+  }
 
 
 

@@ -25,7 +25,9 @@ public class HomeController {
 
         Gson gson = new Gson();
 
+
         ArrayList<Video> videoList = homeService.selectVideoList(video);
+
 
         for(Video tmp:videoList){
             tmp.setThumbnail_mfile(new Gson().fromJson(tmp.getThumbnail(), MFile.class));
@@ -33,8 +35,10 @@ public class HomeController {
             log.info(tmp.toString());
         }
 
+
         mav.addObject("videoList", videoList);
         mav.addObject("video", video);
+
 
         mav.setViewName("main");
         return mav;
