@@ -16,11 +16,8 @@ import net.bramp.ffmpeg.probe.FFmpegProbeResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -92,19 +89,15 @@ public class HomeRestController {
         return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/testPreview", method = RequestMethod.POST)
-    public ResponseEntity<String> uploadPreviewVideo(ModelAndView mav, HttpServletRequest request, MultipartFile video_file)throws Exception{
-        Message message = new Message();
-
-        MFile file = fileUploadUtility.uploadFile(video_file, null);
-        message.put("file", file);
-        message.put("url", file.getUrl());
-
-        mav.addObject("file", video_file);
-
-        return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
-
-    }
+//    public ResponseEntity JsonToObject(HttpServletRequest request) {
+//
+//
+//
+//
+//
+//        return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
+//
+//    }
 
 
 }
