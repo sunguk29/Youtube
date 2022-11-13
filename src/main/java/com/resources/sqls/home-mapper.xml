@@ -14,13 +14,7 @@
     <select id="selectVideoList" resultType="com.model.Video">
         SELECT *, video_file AS videoFile
         FROM VIDEO
-
-    </select>
-
-    <select id="selectInfinityVideoList" resultType="com.model.Video">
-        SELECT *, video_file AS videoFile
-        FROM VIDEO where no > #{last_no} limit 5
-
+        ORDER BY NO DESC
     </select>
 
 </mapper>

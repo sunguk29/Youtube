@@ -12,7 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-
+import java.util.List;
+import java.util.Map;
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -24,47 +25,16 @@ public class HomeController {
 
         Gson gson = new Gson();
 
-
         ArrayList<Video> videoList = homeService.selectVideoList(video);
-
-<<<<<<< HEAD
-=======
-        int hour, minute, second;
->>>>>>> 48f89fd1e1d3914e0321ba557d6870e196de2893
 
         for(Video tmp:videoList){
             tmp.setThumbnail_mfile(new Gson().fromJson(tmp.getThumbnail(), MFile.class));
             tmp.setVideo_mfile(new Gson().fromJson(tmp.getVideoFile(), MFile.class));
-            String time = tmp.getTime();
-            int videoTime = Integer.parseInt(time);
-
-            second = videoTime % 60;
-            minute = videoTime / 60;
-            hour = minute / 60;
-            int realMinute = minute % 60;
-
-            String dbMinute = Integer.toString(realMinute);
-            String dbHour = Integer.toString(hour);
-            String dbSecond = Integer.toString(second);
-
-            if(second < 10){
-                dbSecond = "0" + second;
-            }
-
-            String videoTimed;
-
-            if(dbHour.equals("00") || dbHour.equals("0")){
-                 videoTimed = dbMinute + ":" + dbSecond;
-            } else {
-                 videoTimed = dbHour + ":" + dbMinute + ":" + dbSecond;
-            }
-            tmp.setTime(videoTimed);
+            log.info(tmp.toString());
         }
-
 
         mav.addObject("videoList", videoList);
         mav.addObject("video", video);
-
 
         mav.setViewName("main");
         return mav;

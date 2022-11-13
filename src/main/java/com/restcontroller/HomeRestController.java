@@ -15,14 +15,16 @@ import net.bramp.ffmpeg.probe.FFmpegFormat;
 import net.bramp.ffmpeg.probe.FFmpegProbeResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -31,8 +33,6 @@ public class HomeRestController {
 
     private final HomeService homeService;
     private final FileUploadUtility fileUploadUtility;
-
-    int last_no;
 
     @PostMapping("/test/main")
 
@@ -93,61 +93,18 @@ public class HomeRestController {
     }
 
     @RequestMapping(value = "/testPreview", method = RequestMethod.POST)
-    public ResponseEntity<String> uploadPreviewVideo( HttpServletRequest request, MultipartFile video_file)throws Exception{
+    public ResponseEntity<String> uploadPreviewVideo(ModelAndView mav, HttpServletRequest request, MultipartFile video_file)throws Exception{
         Message message = new Message();
 
         MFile file = fileUploadUtility.uploadFile(video_file, null);
         message.put("file", file);
         message.put("url", file.getUrl());
 
+        mav.addObject("file", video_file);
 
         return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
 
     }
-
-    @PostMapping(value = "/getLastNo")
-    public ResponseEntity<String> getLastNo(HttpServletRequest request, @RequestBody Map<String, Object> params )throws Exception{
-
-        last_no = Integer.parseInt(params.get("lastNo").toString()) ;
-
-        log.info("ssssssssssssssssssssssssssssssssssssssssssss" + params.get("lastNo").toString());
-        Message message = new Message();
-
-        return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
-    }
-
-    @RequestMapping(value = "/getinfinity", method = RequestMethod.GET)
-    public ResponseEntity<String> getInfinity(HttpServletRequest request, Video video )throws Exception{
-
-        last_no = 19;
-
-        log.info("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh" + String.valueOf(last_no));
-
-        ArrayList<Video> videoList = homeService.selectInfinityVideoList(video, last_no);
-
-        Message message = new Message();
-
-        for(Video tmp:videoList){
-            tmp.setThumbnail_mfile(new Gson().fromJson(tmp.getThumbnail(), MFile.class));
-            tmp.setVideo_mfile(new Gson().fromJson(tmp.getVideoFile(), MFile.class));
-            log.info(tmp.toString());
-        }
-
-
-
-
-        message.put("videoList", videoList);
-
-
-//        mav.addObject("videoList", videoList);
-//
-//        mav.setViewName("main");
-        log.info("NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN" + String.valueOf(last_no));
-
-        return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
-    }
-
-
 
 
 }
