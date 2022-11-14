@@ -23,4 +23,8 @@ public class HomeDao {
     public ArrayList<Video> selectVideoList(Video video) {
         return mapper.selectVideoList(video);
     }
+
+    public ArrayList<Video> selectInfinityVideoList(Video video, int last_no) {
+        return mapper.selectInfinityVideoList(video, last_no);
+    }
 }

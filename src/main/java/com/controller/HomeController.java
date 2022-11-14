@@ -27,10 +27,49 @@ public class HomeController {
 
         ArrayList<Video> videoList = homeService.selectVideoList(video);
 
+        int hour, minute, second;
+
         for(Video tmp:videoList){
             tmp.setThumbnail_mfile(new Gson().fromJson(tmp.getThumbnail(), MFile.class));
             tmp.setVideo_mfile(new Gson().fromJson(tmp.getVideoFile(), MFile.class));
-            log.info(tmp.toString());
+
+            try {
+
+                String time = tmp.getTime();
+                int videoTime = Integer.parseInt(time);
+
+                second = videoTime % 60;
+                minute = videoTime / 60;
+                hour = minute / 60;
+                int realMinute = minute % 60;
+
+                String dbMinute = Integer.toString(realMinute);
+                String dbHour = Integer.toString(hour);
+                String dbSecond = Integer.toString(second);
+
+                if (realMinute < 10) {
+                    dbMinute = "0" + realMinute;
+                }
+
+                if (hour < 10) {
+                    dbHour = "0" + hour;
+                }
+
+                if (second < 10) {
+                    dbSecond = "0" + second;
+                }
+
+                String videoTimed;
+
+                if (dbHour.equals("00")) {
+                    videoTimed = dbMinute + ":" + dbSecond;
+                } else {
+                    videoTimed = dbHour + ":" + dbMinute + ":" + dbSecond;
+                }
+                tmp.setTime(videoTimed);
+            } catch (NumberFormatException e) {
+
+            }
         }
 
         mav.addObject("videoList", videoList);
