@@ -20,7 +20,11 @@
     <select id="selectInfinityVideoList" resultType="com.model.Video">
         SELECT *, video_file AS videoFile
         FROM VIDEO where no > #{last_no} limit 5
+    </select>
 
+    <select id="searchWord" resultType="com.model.Video">
+        SELECT *, video_file AS videoFile
+        FROM VIDEO where title LIKE CONCAT('%',#{word},'%')
     </select>
 
 </mapper>

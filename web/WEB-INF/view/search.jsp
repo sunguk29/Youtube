@@ -1,4 +1,5 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +9,19 @@
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!--      드롭다운 안되서 추가 추가하니 됨 -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+            integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+            integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+            crossorigin="anonymous"></script>
+
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet"
@@ -235,6 +249,19 @@
         margin-left: 10px;
     }
 
+    .videoTimeBackGround {
+        position: absolute;
+        top: 166px;
+        left: 288px;
+        background-color: black;
+        width: 40px;
+        height: 14px;
+        z-index: 2;
+        border: 1px solid #000;
+
+
+    }
+
 
 
 
@@ -438,249 +465,191 @@
     </div>
     <div style="width: 100%; height: 100%;  display: inline-block; position: relative; margin-top:20px;">
         <div style="width: 1000px; height: 1000px;  margin-top:20px; margin-left: 450px; position: relative; ">
-            <div style="  z-index: 5; width: 100%; height: 30px;  margin-top: 50px;">
+            <div style="  z-index: 5; width: 100%; height: 30px;  margin-top: 50px;  border-bottom: 1px solid #e2e6ea;">
                 <i class="fa-regular fa-bell" role="button"></i>
                  <label>필터</label>
             </div>
-            <div style="width: 100%; height: 136px; display: flex; border-bottom: 1px solid #e2e6ea; border-top: 1px solid #e2e6ea">
-                <div class="top_container">
-                    <div style="width: 300px; height: 136px; display: flex;">
-                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 100px; height: 100px; border-radius: 75px; margin-top: auto; margin-bottom: auto; margin-left: 100px;">
-                    </div>
 
-                    <div style="display: flex; width: 450px;">
-                    <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                        <div class="mt-0">김조우식의 벗방</div>
-                        <div>
-                        <span>구독자 56.5만명 ·</span>
-                        <span>동영상 180개</span>
-                        </div>
-                        <div>제 채널은 이것저것 많이하고 이러한 유튜브입니다.</div>
-                    </div>
-                    </div>
-                    <div style="display: flex">
-                    <div class="subcribeAlarm" style="margin-top: auto; margin-bottom: auto;">
-                        <button class="subscribe-state">구독중</button>&ensp;
-                        <i class="fa-regular fa-bell" role="button"></i>
-                    </div>
-                    </div>
-                </div>
-            </div>
+
+<%--            <div style="width: 100%; height: 136px; display: flex; border-bottom: 1px solid #e2e6ea; border-top: 1px solid #e2e6ea">--%>
+<%--                <div class="top_container">--%>
+<%--                    <div style="width: 300px; height: 136px; display: flex;">--%>
+<%--                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 100px; height: 100px; border-radius: 75px; margin-top: auto; margin-bottom: auto; margin-left: 100px;">--%>
+<%--                    </div>--%>
+
+<%--                    <div style="display: flex; width: 450px;">--%>
+<%--                    <div class="media-body" style="margin-top: auto; margin-bottom: auto;">--%>
+<%--                        <div class="mt-0">김조우식의 벗방</div>--%>
+<%--                        <div>--%>
+<%--                        <span>구독자 56.5만명 ·</span>--%>
+<%--                        <span>동영상 180개</span>--%>
+<%--                        </div>--%>
+<%--                        <div>제 채널은 이것저것 많이하고 이러한 유튜브입니다.</div>--%>
+<%--                    </div>--%>
+<%--                    </div>--%>
+<%--                    <div style="display: flex">--%>
+<%--                    <div class="subcribeAlarm" style="margin-top: auto; margin-bottom: auto;">--%>
+<%--                        <button class="subscribe-state">구독중</button>&ensp;--%>
+<%--                        <i class="fa-regular fa-bell" role="button"></i>--%>
+<%--                    </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+
+            <form action="search.jsp" method="get">
+
             <div style="margin-top: 10px;">
-                <h6>김조우식의 벗방의 최신 동영상</h6>
-                <div>
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                                <img class="mr-3" src="../../resources/css//img/dog.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">김조우식의과 홍게이의 야릇한 금요일 밤</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                    <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                    <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<%--                <h6>김조우식의 벗방의 최신 동영상</h6>--%>
+<%--                <div>--%>
+<%--                    <div style="width: 100%; height: 136px; display: flex;">--%>
+<%--                        <div class="top_container">--%>
+<%--                                <img class="mr-3" src="../../resources/css//img/dog.png" alt="dog image" style="width: 300px; height: 134px;">--%>
+<%--                            <div style="display: flex; width: 450px;">--%>
+<%--                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">--%>
+<%--                                    <div class="mt-0">김조우식의과 홍게이의 야릇한 금요일 밤</div>--%>
+<%--                                    <div>조회수 10억회·1달전</div>--%>
+<%--                                    <div>--%>
+<%--                                    <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">--%>
+<%--                                    <span style="font-size: 12px;">김조우식의 벗방</span>--%>
+<%--                                    </div>--%>
+<%--                                    <div>--%>
+<%--                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<%--                <div style="margin-top:10px;">--%>
+<%--                    <div style="width: 100%; height: 136px; display: flex;">--%>
+<%--                        <div class="top_container">--%>
+<%--                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">--%>
+<%--                            <div style="display: flex; width: 450px;">--%>
+<%--                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">--%>
+<%--                                    <div class="mt-0">특별초대게스트: 오랑이</div>--%>
+<%--                                    <div>조회수 10억회·1달전</div>--%>
+<%--                                    <div>--%>
+<%--                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">--%>
+<%--                                        <span style="font-size: 12px;">김조우식의 벗방</span>--%>
+<%--                                    </div>--%>
+<%--                                    <div>--%>
+<%--                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <div style="width: 100%; height: 50px; display: flex; border-bottom: 1px solid #000;">
-                    <span style="margin: auto;">+8개 더보기</span>
-                </div>
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px; display: flex;">
+<%--                <div style="width: 100%; height: 50px; display: flex; border-bottom: 1px solid #000;">--%>
+<%--                    <span style="margin: auto;">+8개 더보기</span>--%>
+<%--                </div>--%>
+                <div style=" border-bottom: 1px solid #e2e6ea;">
+                    <c:forEach items="${videoList}" var="item" begin="0" end="3" varStatus="status">
+                    <div style="width: 100%; height: 186px; display: flex; margin-bottom: 10px; margin-top: 10px;">
                         <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
+                            <div style="width: 335px; height: 184px; margin-right: 16px;">
+                                <img class="mr-3" src="${item.thumbnail_mfile.url}" alt="dog image" style="width: 100%; height: 100%; border-radius: 10px;">
+                                <div class="videoTimeBackGround">
+                                    <span class="videoTime" style="position: absolute;  color: white; font-size: 11px; margin-left: 7px; top: -1px; left: -1px;  ">${item.time}</span>
+                                    <span class="videoHover" style="font-size:10px;"></span>
+                                </div>
+                            </div>
+                            <div style="display: flex; width: 450px; height: 100%; margin-bottom: 10px;">
                                 <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
+                                    <div class="mt-0" style="margin-bottom: 3px; font-weight: 400;">${item.title}</div>
+                                    <div style="font-size: 11px;">조회수 10억회·1달전</div>
+                                    <div style="margin-top: 5px; margin-bottom: 5px;">
+                                        <img class="mr-3" src="/resources/css/img/human.jpg" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
                                         <span style="font-size: 12px;">김조우식의 벗방</span>
                                     </div>
                                     <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
+                                        <span style="font-size: 13px;">${item.description}</span>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px;  display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top:10px; border-bottom: 1px solid #e2e6ea;">
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
 
                 <div style="margin-top: 10px;">
-                    <h5>관련 동영상</h5>
+                    <span style="font-size: 15px; margin-top: 15px; margin-bottom: 15px;">관련 동영상</span>
                 </div>
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <c:forEach items="${videoList}" var="item" begin="4" varStatus="status">
+        <div style="width: 100%; height: 186px; display: flex; margin-bottom: 10px; margin-top: 10px;">
+            <div class="top_container">
+                <div style="width: 335px; height: 184px; margin-right: 16px;">
+                    <img class="mr-3" src="${item.thumbnail_mfile.url}" alt="dog image" style="width: 100%; height: 100%; border-radius: 10px;">
+                    <div class="videoTimeBackGround">
+                        <span class="videoTime" style="position: absolute;  color: white; font-size: 11px; margin-left: 7px; top: -1px; left: -1px; ">${item.time}</span>
+                        <span class="videoHover" style="font-size:10px;"></span>
                     </div>
                 </div>
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
+                <div style="display: flex; width: 450px; height: 100%; margin-bottom: 10px;">
+                    <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
+                        <div class="mt-0" style="margin-bottom: 3px; font-weight: 400;">${item.title}</div>
+                        <div style="font-size: 11px;">조회수 10억회·1달전</div>
+                        <div style="margin-top: 5px; margin-bottom: 5px;">
+                            <img class="mr-3" src="/resources/css/img/human.jpg" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
+                            <span style="font-size: 12px;">김조우식의 벗방</span>
                         </div>
-                    </div>
-                </div>
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div style="margin-top:10px;">
-                    <div style="width: 100%; height: 136px; display: flex;">
-                        <div class="top_container">
-                            <img class="mr-3" src="../../resources/css//img/thumbnail.png" alt="dog image" style="width: 300px; height: 134px;">
-                            <div style="display: flex; width: 450px;">
-                                <div class="media-body" style="margin-top: auto; margin-bottom: auto;">
-                                    <div class="mt-0">특별초대게스트: 오랑이</div>
-                                    <div>조회수 10억회·1달전</div>
-                                    <div>
-                                        <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image" style="width: 20px; height: 20px; border-radius: 75px; margin-top: auto; margin-bottom: auto; ">
-                                        <span style="font-size: 12px;">김조우식의 벗방</span>
-                                    </div>
-                                    <div>
-                                        <span style="font-size: 12px;">야릇한 금요일 저녁 외로운 사람은 김조우식한테 문의하세요</span>
-                                    </div>
-                                </div>
-                            </div>
+                        <div>
+                            <span style="font-size: 13px;">${item.description}</span>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </c:forEach>
+            </div>
+            </form>
+        </div>
 
     </div>
 
+<script src="https://unpkg.com/@api.video/video-uploader" defer></script>
+<script>
+
+
+
+    $(document).ready(function () {
+        console.log('document ready');
+
+    });
+
+    const btn = document.querySelector('.input-group-text')
+    const a_element = document.querySelector('.form-control')
+
+    btn.addEventListener('click', function (event) {
+        console.log(a_element.value + '를 검색했습니다')
+
+        var searchData = {
+            word: a_element.value
+        }
+
+        // location.href = "search.jsp"
+
+
+        fetch("/postSearchWord", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(searchData),
+        }).then((response) => {
+            console.log("word 전송")
+            location.href = "search.do"
+        })
+
+    });
+
+
+</script>
+
+
 </body>
+
 </html>

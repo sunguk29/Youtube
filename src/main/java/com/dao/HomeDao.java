@@ -27,4 +27,8 @@ public class HomeDao {
     public ArrayList<Video> selectInfinityVideoList(Video video, int last_no) {
         return mapper.selectInfinityVideoList(video, last_no);
     }
+
+    public ArrayList<Video> searchWord(String word) {
+        return mapper.searchWord(word);
+    }
 }

@@ -27,6 +27,10 @@ public class HomeService {
 
     public ArrayList<Video> selectInfinityVideoList(Video video, int last_no) {
         return homeDao.selectInfinityVideoList(video, last_no);
-
     }
+
+    public ArrayList<Video> searchWord(String word) {
+        return homeDao.searchWord(word);
+    }
+
 }

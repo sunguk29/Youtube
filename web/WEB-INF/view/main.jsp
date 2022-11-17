@@ -148,8 +148,8 @@
     }
 
     li > .btn-primary {
-        border: 1px solid darkgray;
-        border-radius: 16px;
+        border: 0px solid darkgray;
+        border-radius: 8px;
         background-color: #ECECEC;
         color: black;
         font-size: 12px;
@@ -283,19 +283,20 @@
 
     .videoTime {
         position: absolute;
-        top: 10px;
-        left: 10px;
+        top: 5px;
+        left: 6px;
         z-index: 3;
         line-height: 0.5;
+        font-size: 11px;
     }
 
     .videoTimeBackGround {
         position: absolute;
-        top: 176px;
-        left: 211px;
+        top: 185px;
+        left: 232px;
         background-color: black;
-        width: 60px;
-        height: 24px;
+        width: 40px;
+        height: 14px;
         /*z-index: 2;*/
         /*border: 1px solid #000;*/
 
@@ -679,6 +680,10 @@
         }
     }
 
+    .list-group-horizontal > li > input {
+
+    }
+
 
 </style>
 
@@ -692,7 +697,7 @@
         <div class="row top_layout">
             <div class="input-group mb-3 ">
                 <input type="text" class="form-control" placeholder="검색">
-                <span class="btn input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
+                    <span class="btn input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
             <button class="make_video"><i class="fa-solid fa-video"></i></button>
 
@@ -711,17 +716,19 @@
                     <li class="list-group-item"><input class="btn btn-primary" type="button" value="실시간"></li>
                     <li class="list-group-item"><input class="btn btn-primary" type="button" value="영화"></li>
                     <li class="list-group-item"><input class="btn btn-primary" type="button" value="요리"></li>
-                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="요리요리요리요리요리요리요리">
-                    </li>
-                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="요리"></li>
-                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="요리"></li>
-                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="요리"></li>
-                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="요리"></li>
+                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="스포츠"></li>
+                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="축구"></li>
+                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="최근에 업로드된 영상"></li>
+                    <li class="list-group-item"><input class="btn btn-primary" type="button" value="감상한 동영상"></li>
                 </ul>
             </div>
         </div>
     </div>
 </header>
+
+<body>
+
+
 
 <!--    모달 background-->
 
@@ -1160,8 +1167,28 @@
     const a_element = document.querySelector('.form-control')
 
     btn.addEventListener('click', function (event) {
-        alert(a_element.value + '를 검색했습니다')
-    })
+        console.log(a_element.value + '를 검색했습니다')
+
+        var searchData = {
+            word: a_element.value
+        }
+
+        // location.href = "search.jsp"
+
+
+        fetch("/postSearchWord", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(searchData),
+        }).then((response) => {
+            console.log("word 전송")
+            location.href = "search.do"
+        })
+
+    });
 
 
     // var count = 14
@@ -1169,7 +1196,7 @@
     var isScroll = true
 
     function delay(ms) {
-        console.log("delay 중 !!!")
+        // console.log("delay 중 !!!")
         return new Promise(resolve => setTimeout(resolve, ms))
     }
 
@@ -1181,7 +1208,7 @@
 
         if (postData.lastNo == 999) {
 
-            console.log("끝끝끝끝끝끝끝끝끝끝끝")
+            // alert("끝끝끝끝끝끝끝끝끝끝끝")
 
         } else {
             // if (isScroll) {
@@ -1200,7 +1227,7 @@
                 }).then(async function (response) {
 
 
-                    console.log("getLastNo 시작 : " + postData.lastNo)
+                    // console.log("getLastNo 시작 : " + postData.lastNo)
                      await delay(500);
 
                 })
@@ -1224,7 +1251,7 @@
                             postData.lastNo = data.data.videoList[4].no
                         }
 
-                        console.log(data)
+                        // console.log(data)
 
                         createEle()
                         isScroll = true
@@ -1242,7 +1269,7 @@
                             toAdd.classList.add('row')
                             toAdd.classList.add('row-cols-5')
 
-                            console.log(postData.lastNo)
+                            // console.log(postData.lastNo)
 
                             for (let i = 0; i < 5; i++) {
                                 var a = document.createElement('div')
@@ -1260,7 +1287,7 @@
         <div class="card-container">
           <div class="main_video_container">
             <img src="` + videoList.thumbnail_mfile.url + `" class="card-img-top" alt="...">
-            <div style="position: absolute;  top: 176px; left: 211px; background-color:black; width:60px; height:24px;">
+            <div class="videoTimeBackGround">
               <span class="videoTime" style="color: white;">` + videoList.time + `</span>
               <span class="videoHover" style="font-size:10px;"></span>
             </div>

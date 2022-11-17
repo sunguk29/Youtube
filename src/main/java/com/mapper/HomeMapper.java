@@ -14,4 +14,7 @@ public interface HomeMapper {
 
     ArrayList<Video> selectInfinityVideoList(Video video, @Param("last_no") int last_no);
 
+    ArrayList<Video> searchWord(@Param("word") String word);
+
+
 }
