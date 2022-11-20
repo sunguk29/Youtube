@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.model.Video;
 import com.model.common.MFile;
 import com.service.HomeService;
+import com.util.Time;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -21,9 +24,13 @@ public class HomeController {
     private final HomeService homeService;
 
     @GetMapping("/")
-    public ModelAndView youtubeHome(ModelAndView mav, HttpServletRequest request, Video video){
+    public ModelAndView youtubeHome(ModelAndView mav, HttpServletRequest request, Video video) throws ParseException {
 
         Gson gson = new Gson();
+
+        Time times = new Time();
+
+
 
         ArrayList<Video> videoList = homeService.selectVideoList(video);
 
@@ -33,6 +40,9 @@ public class HomeController {
             tmp.setThumbnail_mfile(new Gson().fromJson(tmp.getThumbnail(), MFile.class));
             tmp.setVideo_mfile(new Gson().fromJson(tmp.getVideoFile(), MFile.class));
 
+            LocalDateTime localDateTime = tmp.getReg_datetime();
+            String regDateTime = times.TimeFormatChatTimeString(localDateTime);
+            tmp.setCompare_reg_datetime(regDateTime);
             try {
 
                 String time = tmp.getTime();
@@ -67,9 +77,11 @@ public class HomeController {
                     videoTimed = dbHour + ":" + dbMinute + ":" + dbSecond;
                 }
                 tmp.setTime(videoTimed);
-            } catch (NumberFormatException e) {
 
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
+
         }
 
         mav.addObject("videoList", videoList);

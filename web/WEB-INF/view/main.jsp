@@ -952,7 +952,7 @@
                                         <%--채널이름 필요할거같음--%>
                                     <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
                                     <p class="video_info" style="font-size: 14px;"> 조회수 ${item.views}
-                                        ·${item.reg_datetime}</p>
+                                        ·${item.compare_reg_datetime}</p>
                                 </div>
                             </div>
                         </div>

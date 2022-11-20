@@ -9,6 +9,8 @@ import lombok.ToString;
 import org.joda.time.DateTime;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.time.LocalDateTime;
+
 @RequiredArgsConstructor
 @Data
 @AllArgsConstructor
@@ -20,7 +22,7 @@ public class Video {
     private int userNo;
     private String thumbnail;
     private int views;
-    private DateTime reg_datetime;
+    private LocalDateTime reg_datetime;
     private DateTime update_datetime;
     private int likes;
     private int dislikes;
@@ -32,5 +34,6 @@ public class Video {
     private MultipartFile video_file;
     private MFile thumbnail_mfile;
     private MFile video_mfile;
+    private String compare_reg_datetime;
 
 }
