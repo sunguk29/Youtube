@@ -5,6 +5,7 @@ import com.model.Video;
 import com.model.common.MFile;
 import com.response.Message;
 import com.service.HomeService;
+import com.util.Time;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import  com.restcontroller.HomeRestController;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.ParseException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Slf4j
@@ -23,8 +26,10 @@ public class SearchController {
     private final HomeRestController homeRestController;
 
 
+
+
     @GetMapping("/search.do")
-    public ModelAndView youtubeSearch(ModelAndView mav, HttpServletRequest request, Video video){
+    public ModelAndView youtubeSearch(ModelAndView mav, HttpServletRequest request, Video video) throws ParseException {
 
         String word =  homeRestController.word;
 
@@ -33,6 +38,8 @@ public class SearchController {
 
 
         int hour, minute, second;
+        Time times = new Time();
+
 
 //        log.info("hhhhhhhhhhhhhh  " + String.valueOf(last_no));
 
@@ -44,6 +51,13 @@ public class SearchController {
             tmp.setVideo_mfile(new Gson().fromJson(tmp.getVideoFile(), MFile.class));
             String time = tmp.getTime();
             int videoTime = Integer.parseInt(time);
+
+            LocalDateTime localDateTime = tmp.getReg_datetime();
+            String regDateTime = times.TimeFormatChatTimeString(localDateTime);
+            tmp.setCompare_reg_datetime(regDateTime);
+
+            log.info("sssssss" + tmp.getReg_datetime());
+
 
             second = videoTime % 60;
             minute = videoTime / 60;

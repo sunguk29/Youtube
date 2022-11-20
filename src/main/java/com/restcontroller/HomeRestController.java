@@ -8,6 +8,7 @@ import com.model.common.MFile;
 import com.response.DefaultRes;
 import com.response.Message;
 import com.service.HomeService;
+import com.util.Time;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.bramp.ffmpeg.FFprobe;
@@ -23,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Map;
@@ -37,6 +39,8 @@ public class HomeRestController {
 
     int last_no;
     public String word;
+    Time times = new Time();
+
 
     @PostMapping("/test/main")
 
@@ -140,6 +144,12 @@ public class HomeRestController {
             tmp.setVideo_mfile(new Gson().fromJson(tmp.getVideoFile(), MFile.class));
             String time = tmp.getTime();
             int videoTime = Integer.parseInt(time);
+
+            LocalDateTime localDateTime = tmp.getReg_datetime();
+            String regDateTime = times.TimeFormatChatTimeString(localDateTime);
+            tmp.setCompare_reg_datetime(regDateTime);
+
+
 
             second = videoTime % 60;
             minute = videoTime / 60;

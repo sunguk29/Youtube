@@ -92,6 +92,7 @@
         height: 40px;
         z-index: 5;
         padding-top: 8px;
+        margin-right: 250px;
     }
 
     .header_layout {
@@ -408,7 +409,7 @@
 
     .make_video {
         position: absolute;
-        left: 1050px;
+        left: 1000px;
         z-index: 5;
         background: none;
         border: none;
@@ -690,7 +691,7 @@
 
 <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 4;">
     <div class="container-fluid header_layout">
-        <!-- rogo -->
+            <a href="/"><img src="/resources/css/img/youtube.png"  style="position: absolute; width: 100px; height: 40px; top: 10px; left: 40px;"></a>
         <div>
 
         </div>
@@ -700,7 +701,6 @@
                     <span class="btn input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
             <button class="make_video"><i class="fa-solid fa-video"></i></button>
-
         </div>
         <!-- account and alarm -->
         <div>
@@ -1315,7 +1315,7 @@
                 </div>
                 <%--채널이름 필요할거같음--%>
                 <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
-                <p class="video_info" style="font-size: 14px;"> 조회수 ` + videoList.views + ` · ` + videoList.reg_datetime + `</p>
+                <p class="video_info" style="font-size: 14px;"> 조회수 ` + videoList.views + ` · ` + videoList.compare_reg_datetime + `</p>
               </div>
             </div>
           </div>
