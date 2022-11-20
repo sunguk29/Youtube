@@ -28,7 +28,6 @@ public class SearchController {
 
         String word =  homeRestController.word;
 
-        log.info("mmmmmmmmmmmmmmmmmm" + word);
 
         ArrayList<Video> videoList = homeService.searchWord(word);
 
@@ -77,7 +76,6 @@ public class SearchController {
             tmp.setTime(videoTimed);
         }
 
-        log.info("hhhhhhhhhhhhhhhhhhhhhhhhhhh         " + videoList.toString());
 
 
 

@@ -6,14 +6,20 @@ import com.model.common.MFile;
 import com.service.HomeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import static com.util.Time.TimeFormatChatTimeString;
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller
@@ -27,6 +33,10 @@ public class HomeController {
 
         ArrayList<Video> videoList = homeService.selectVideoList(video);
 
+
+
+
+        // 동영상 시간초
         int hour, minute, second;
 
         for(Video tmp:videoList){

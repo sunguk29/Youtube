@@ -740,44 +740,44 @@
         <div class="scrolls">
             <div class="container_bar">
                 <div class="left-side-bar-1">
-                    <div class="hoverTest" style="background-color: #a9a9a9;">
+                    <div class="hoverTest" >
                         <div class="left_icon"><i class="fa-solid fa-house"></i></div>
                         <div class="left_component">홈</div>
                     </div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-magnifying-glass"></i></div>
                     <div class="left_component">탐색</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-clapperboard"></i></div>
                     <div class="left_component">구독</div>
                 </div>
             </div>
 
             <div class="container_bar">
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-sharp fa-solid fa-file-video"></i></div>
                     <div class="left_component">보관함</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-folder"></i></div>
                     <div class="left_component">시청 기록</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-address-book"></i></div>
                     <div class="left_component">내 동영상</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-file-export"></i></div>
                     <div class="left_component">나중에 볼 동영상</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-heart-circle-plus"></i></div>
                     <div class="left_component">좋아요 표시한 동영상</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-music"></i></div>
                     <div class="left_component">노래</div>
                 </div>
             </div>
@@ -785,33 +785,33 @@
             <div class="container_bar">
                 <div class="left-side-bar-sub">구독</div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-user"></i></div>
                     <div class="left_component">유튜버1</div>
                     <a class="badge badge-primary sub">·</a>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-user"></i></div>
                     <div class="left_component">유튜버2</div>
                     <a class="badge badge-primary sub">·</a>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-user"></i></div>
                     <div class="left_component">유튜버3</div>
                     <a class="badge badge-primary sub">·</a>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-user"></i></div>
                     <div class="left_component">유튜버4</div>
                     <a class="badge badge-primary sub">·</a>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-user"></i></div>
                     <div class="left_component">유튜버5</div>
                     <a class="badge badge-primary sub">·</a>
                 </div>
                 <div class="hoverTest">
                     <div class="left-side-bar-view">
-                        <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                        <div class="left_icon"><i class="fa-solid fa-plus"></i></div>
                         <div class="left_component">20개 더보기</div> <!--드랍다운이면서 페이징 원리인거같은데 일단은 패스-->
 
                     </div>
@@ -821,27 +821,27 @@
             <div class="container_bar">
                 <div class="left-side-bar-sub">YOUTUBE 더보기</div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-regular fa-address-card"></i></div>
                     <div class="left_component">YouTube Premium</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-regular fa-file-video"></i></div>
                     <div class="left_component">영화</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-dice"></i></div>
                     <div class="left_component">게임</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-truck-fast"></i></div>
                     <div class="left_component">실시간</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
-                    <div class="left_component">학슴</div>
+                    <div class="left_icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                    <div class="left_component">학습</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-volleyball"></i></div>
                     <div class="left_component">스포츠</div>
                 </div>
             </div>
@@ -849,11 +849,11 @@
             <div class="container_bar">
 
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-gears"></i></div>
                     <div class="left_component">설정</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-solid fa-circle-exclamation"></i></div>
                     <div class="left_component">신고 기록</div>
                 </div>
                 <div class="hoverTest">
@@ -861,7 +861,7 @@
                     <div class="left_component">고객 센터</div>
                 </div>
                 <div class="hoverTest">
-                    <div class="left_icon"><i class="fa-solid fa-house"></i></div>
+                    <div class="left_icon"><i class="fa-regular fa-envelope"></i></div>
                     <div class="left_component">의견 보내기</div>
                 </div>
             </div>
