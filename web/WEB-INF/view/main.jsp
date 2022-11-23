@@ -8,8 +8,6 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-
-    <!--      드롭다운 안되서 추가 추가하니 됨 -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
             integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
             crossorigin="anonymous"></script>
@@ -30,27 +28,17 @@
 
     <script src="https://kit.fontawesome.com/22437c0385.js" crossorigin="anonymous"></script>
 
-    <!-- Optional JavaScript; choose one of the two! -->
-
-    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"
             integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
             crossorigin="anonymous"></script>
-    <!--      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"-->
-    <!--              integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"-->
-    <!--              crossorigin="anonymous"></script>-->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF"
             crossorigin="anonymous"></script>
-    <!-- Option 2: Separate Popper and Bootstrap JS -->
-    <!--
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
-    -->
+
 
     <title>Youtube Modal</title>
 </head>
@@ -303,20 +291,6 @@
 
     }
 
-    .videoMore {
-        transition: .1s ease;
-        opacity: 0;
-        position: absolute;
-        top: 1050px;
-        left: 250px;
-
-        text-align: center;
-    }
-
-    .media-body:hover .videoMore {
-        opacity: 1;
-    }
-
     .videoMore1 {
 
         transition: .1s ease;
@@ -519,12 +493,8 @@
         margin-top: 50px;
         position: sticky;
         align-self: flex-start;
-
         display: flex;
         flex-direction: column;
-
-
-        /*left: 1000px;*/
     }
 
 
@@ -646,43 +616,6 @@
 
     media-body {
         width: 100%;
-    }
-
-    .loadingBox > .dim {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, .1);
-    }
-
-    .loadingBox > .circle {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-        width: 40px;
-        height: 40px;
-        border: 10px solid #fff;
-        border-top: 10px solid black;
-        border-radius: 50em;
-        animation-name: spinCircle;
-        animation-duration: .8s;
-        animation-iteration-count: infinite;
-    }
-
-    @keyframes spinCircle {
-        from {
-            transform: translate(-50%, -50%) rotate(0);
-        }
-        to {
-            transform: translate(-50%, -50%) rotate(360deg);
-        }
-    }
-
-    .list-group-horizontal > li > input {
-
     }
 
 
@@ -926,7 +859,7 @@
                         </div>
                         <div class="card-body">
                             <div class="media">
-                                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+                                <img src="/resources/css/img/user.PNG" class="align-self-start mr-3" alt="..."
                                      style="width: 36px; height: 36px; position: relative; z-index: 1;">
                                 <div class="media-body">
                                     <div class="media_body_more">
@@ -950,7 +883,7 @@
                                         </div>
                                     </div>
                                         <%--채널이름 필요할거같음--%>
-                                    <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
+                                    <p class="video_info" style="font-size: 14px;">User</p>
                                     <p class="video_info" style="font-size: 14px;"> 조회수 ${item.views}
                                         ·${item.compare_reg_datetime}</p>
                                 </div>
@@ -959,53 +892,8 @@
                     </div>
                 </div>
             </c:forEach>
-<%--            <div class="col">--%>
-<%--                <div class="card-container">--%>
-<%--                    <div class="main_video_container">--%>
-<%--                        <img src="/resources/css/img/dog.png" class="card-img-top" alt="...">--%>
-<%--                        <div class="videoTimeBackGround">--%>
-<%--                            <span class="videoTime" style="color: white;">20:00</span>--%>
-<%--                            <span class="videoHover" style="font-size:10px;"></span>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                    <div class="card-body">--%>
-<%--                        <div class="media">--%>
-<%--                            <a onclick="video_select('${item.no}');" class="video_select">--%>
-<%--                                <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."--%>
-<%--                                     style="width: 36px; height: 36px; position: relative; z-index: 1;">--%>
-<%--                            </a>--%>
-<%--                            <div class="media-body">--%>
-<%--                                <div class="media_body_more">--%>
-<%--                                    <h6 class="mt-0">[동물농장] 강아지가 너무 귀엽다&nbsp;</h6>--%>
-<%--                                    <div class="videoMore1">--%>
-<%--                                        <div>--%>
-<%--                                            <div class="dropdown">--%>
-<%--                                                <div class="dropdown video_dropdown dropdownMenuButton"--%>
-<%--                                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--%>
-<%--                                                    <i class="fa fa-ellipsis-vertical fa-lg"></i>--%>
-<%--                                                </div>--%>
-<%--                                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">--%>
-<%--                                                    <a class="dropdown-item" href="javascript: void(0)"><i--%>
-<%--                                                            class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>--%>
-<%--                                                    <a class="dropdown-item" href="javascript: void(0)"><i--%>
-<%--                                                            class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>--%>
-<%--                                                </div>--%>
-<%--                                            </div>--%>
-<%--                                        </div>--%>
-<%--                                    </div>--%>
-<%--                                </div>--%>
-<%--                                <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>--%>
-<%--                                <p class="video_info" style="font-size: 14px;"> 조회수 1억회 ·1달 전</p>--%>
-<%--                            </div>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </div>--%>
+
         </div>
-        <%--    <div class="loadingBox" style="width: 100%; height: 60px; overflow: hidden; margin-bottom: 100px; position: relative; display: none">--%>
-        <%--      <div class="dim"></div>--%>
-        <%--      <div class="circle"></div>--%>
-        <%--    </div>--%>
     </div>
 </form>
 
@@ -1066,6 +954,7 @@
                             <div class="row img_input" style="margin-top: 20px;">
                                 <input type="file" accept="image/jpeg,.txt" class="modal_thumbnail"
                                        name="thumbnail_file" onchange="imgPreview()" multiple/>
+                                <div style="position: absolute; background-color: white; left: 90px; width: 85px; height: 70px; "></div>
                                 <div class="img col-3 thumbnail_1"><img src="/resources/css/img/dog.png"
                                                                         class="contents-img" alt="..."></div>
                                 <div class="img col-3 thumbnail_2"><img src="/resources/css/img/dog.png"
@@ -1156,10 +1045,7 @@
 
 
     function video_select(no) {
-
         document.querySelector('video_select');
-
-        //action = "value='/videoView/selectVideoDetail.do'/>";
     }
 
     let text = '';
@@ -1172,9 +1058,6 @@
         var searchData = {
             word: a_element.value
         }
-
-        // location.href = "search.jsp"
-
 
         fetch("/postSearchWord", {
             method: "POST",
@@ -1190,9 +1073,6 @@
 
     });
 
-
-    // var count = 14
-
     var isScroll = true
 
     function delay(ms) {
@@ -1201,18 +1081,16 @@
     }
 
 
-    // window.onscroll = function () {
 
     window.addEventListener('scroll', function () {
 
 
         if (postData.lastNo == 999) {
 
-            // alert("끝끝끝끝끝끝끝끝끝끝끝")
+
 
         } else {
-            // if (isScroll) {
-            //
+
             if ((isScroll && window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
 
                 isScroll = false
@@ -1227,7 +1105,6 @@
                 }).then(async function (response) {
 
 
-                    // console.log("getLastNo 시작 : " + postData.lastNo)
                      await delay(500);
 
                 })
@@ -1236,9 +1113,7 @@
 
                 async function getInfinity() {
 
-                    // waitEle()
                     await delay(100);
-                    // deleteWait()
 
                     fetch("/getinfinity")
                         .then(function (response) {
@@ -1251,17 +1126,9 @@
                             postData.lastNo = data.data.videoList[4].no
                         }
 
-                        // console.log(data)
 
                         createEle()
                         isScroll = true
-                        // setTimeout(() => {
-
-                            // deleteWait()
-
-                            //
-                        // }, 1000)
-
 
                         function createEle() {
 
@@ -1269,7 +1136,6 @@
                             toAdd.classList.add('row')
                             toAdd.classList.add('row-cols-5')
 
-                            // console.log(postData.lastNo)
 
                             for (let i = 0; i < 5; i++) {
                                 var a = document.createElement('div')
@@ -1294,7 +1160,7 @@
           </div>
           <div class="card-body">
             <div class="media">
-              <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+              <img src="/resources/css/img/user.PNG" class="align-self-start mr-3" alt="..."
                    style="width: 36px; height: 36px; position: relative; z-index: 1;">
               <div class="media-body">
                 <div class="media_body_more">
@@ -1313,8 +1179,7 @@
                     </div>
                   </div>
                 </div>
-                <%--채널이름 필요할거같음--%>
-                <p class="video_info" style="font-size: 14px;">sbs 동물농장</p>
+                <p class="video_info" style="font-size: 14px;">User</p>
                 <p class="video_info" style="font-size: 14px;"> 조회수 ` + videoList.views + ` · ` + videoList.compare_reg_datetime + `</p>
               </div>
             </div>
@@ -1336,19 +1201,9 @@
                     return false;
                 }
             }
-            // } isScroll
+
         }
     })
-
-    // function waitEle() {
-    //   document.querySelector('.loadingBox').style.display = "block"
-    //
-    // }
-    //
-    // function deleteWait() {
-    //   document.querySelector('.loadingBox').style.display = "none"
-    //   document.querySelector('.content-wrapper').append(document.querySelector('.loadingBox'))
-    // }
 
 
     // 모달
@@ -1381,6 +1236,8 @@
         $('html, body').css({'overflow': 'auto', 'height': '100%'}); //scroll hidden 해제
         $('#element').off('scroll touchmove mousewheel'); // 터치무브 및 마우스휠 스크롤 가능
         $(`.modal_background`).css('display', 'none')
+
+        location.href = "/"
     })
 
 
@@ -1438,10 +1295,6 @@
 
         let form = document.getElementById('insertModalForm');
         const formData = new FormData(form);
-        // const fileField = document.querySelector('input[type="file"]');
-
-        // formData.append('username', 'abc123');
-        // formData.append('avatar', fileField.files[0]);
 
         fetch("/test/main", {
             method: 'POST',
@@ -1475,10 +1328,7 @@
             console.log(input.files)
             // 유사배열을 배열로 변환 (forEach문으로 처리하기 위해)
             const fileArr = Array.from(input.files)
-            // const $colDiv1 = document.createElement("div")
-            // const $colDiv2 = document.createElement("div")
-            // $colDiv1.classList.add("column")
-            // $colDiv2.classList.add("column")
+
             fileArr.forEach((file, index) => {
 
 
@@ -1560,14 +1410,7 @@
     window.onkeydown = function (event) {
 
         if (event.keyCode == 27) {
-
-            if ($('.modal').hide() == true) {
-                close()
-                // $(`.modal_background`).css('display', 'none')
-                // $('.modal').hide()
-                location.reload()
-            }
-
+            location.href = "/"
         }
 
     };
