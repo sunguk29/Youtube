@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -681,17 +683,17 @@
     <div class="main_contents ">
         <!-- main video -->
         <div class="main_video">
-            <img src="/web/resources/css/img/dog.png" class="main_video_contents" alt="...">
+            <img src=${playVideo.video_mfile.url} class="main_video_contents" alt="...">
         </div>
         <!-- main video explation-->
         <div class="main_video_des">
             <div class="video_containner">
                 <a class="video_popularity">게임 인기 급상승 동영상 #22</a>
-                <div class="video_title">이상한 나라</div>
+                <div class="video_title">${playVideo.title}</div>
                 <div class="video_des_containner">
                     <div>
                         <span>조회수 316,526회</span>
-                        <span>· 2022. 9. 1.</span>
+                        <span>· ${playVideo.reg_datetime}</span>
                     </div>
                     <div class="like_sharing_store">
                         <span><i class="fa-regular fa-thumbs-up"></i>&nbsp1.7천</span>

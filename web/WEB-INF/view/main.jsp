@@ -851,7 +851,9 @@
                 <div class="col">
                     <div class="card-container">
                         <div class="main_video_container">
-                            <img src="${item.thumbnail_mfile.url}" class="card-img-top" alt="...">
+                            <a href="playpage.do?no=${item.no}">
+                                <img src="${item.thumbnail_mfile.url}" class="card-img-top" alt="...">
+                            </a>
                             <div class="videoTimeBackGround">
                                 <span class="videoTime" style="color: white;">${item.time}</span>
                                 <span class="videoHover" style="font-size:10px;"></span>

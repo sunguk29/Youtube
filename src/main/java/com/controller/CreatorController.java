@@ -8,9 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class CreatorController {
-    @GetMapping(value="/playpage.do")
+   /* @GetMapping(value="/playpage.do")
     public ModelAndView selectPlayPage(HttpServletRequest request, ModelAndView mav){
         mav.setViewName("/playpage.do");
         return mav;
-    }
+    }*/
 }

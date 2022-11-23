@@ -30,15 +30,9 @@ public class HomeController {
     public ModelAndView youtubeHome(ModelAndView mav, HttpServletRequest request, Video video) throws ParseException {
 
         Gson gson = new Gson();
-
         Time times = new Time();
 
-
-
         ArrayList<Video> videoList = homeService.selectVideoList(video);
-
-
-
 
         // 동영상 시간초
         int hour, minute, second;
