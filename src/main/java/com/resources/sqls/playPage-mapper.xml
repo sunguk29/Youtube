@@ -9,4 +9,14 @@
         where no=#{no}
     </select>
 
+    <insert id="insertComment" parameterType="com.model.Review" useGeneratedKeys="true" keyProperty="no">
+        insert into review(
+         type, user_no,  video_no, content,
+         reg_datetime, update_datetime, review_no)
+         VALUES (
+        #{type}, #{user_no}, #{video_no}, #{content},
+        now(), now(), #{review_no}
+        )
+    </insert>
+
 </mapper>

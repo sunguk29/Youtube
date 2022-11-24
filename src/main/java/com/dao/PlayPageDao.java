@@ -2,6 +2,7 @@ package com.dao;
 
 import com.mapper.HomeMapper;
 import com.mapper.PlayPageMapper;
+import com.model.Review;
 import com.model.Video;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -18,5 +19,10 @@ public class PlayPageDao {
 
     public Video selectVideo(Video video) {
         return mapper.selectVideo(video);
+    }
+
+
+    public int insertComment(Review review) {
+        return mapper.insertComment(review);
     }
 }

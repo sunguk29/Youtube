@@ -2,6 +2,7 @@ package com.service;
 
 import com.dao.HomeDao;
 import com.dao.PlayPageDao;
+import com.model.Review;
 import com.model.Video;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -16,5 +17,9 @@ public class PlayPageService {
 
     public Video selectVideo(Video video) {
         return playPageDao.selectVideo(video);
+    }
+
+    public int insertComment(Review review) {
+        return playPageDao.insertComment(review);
     }
 }
