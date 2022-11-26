@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.google.gson.Gson;
+import com.model.Review;
 import com.model.Video;
 import com.model.common.MFile;
 import com.service.HomeService;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -26,12 +28,13 @@ public class PlayPageController {
     private final HomeService homeService;
 
     @GetMapping("/playpage.do")
-    public ModelAndView playpage(ModelAndView mav, HttpServletRequest request, Video video) throws ParseException {
+    public ModelAndView playpage(ModelAndView mav, HttpServletRequest request, Video video, Review review) throws ParseException {
 
         Time times = new Time();
 
         String num = request.getParameter("no");
         int no = Integer.parseInt(num);
+        review.setVideo_no(no);
 
         Video playVideo = playPageService.selectVideo(video);
         ArrayList<Video> videoList = homeService.selectVideoList(video);
@@ -88,11 +91,14 @@ public class PlayPageController {
 
         }
 
+        List<Review> commentList = playPageService.selectCommentList(review);
+
         log.info("videoList", videoList);
 
         mav.addObject("videoList", videoList);
         mav.addObject("playVideo", playVideo);
         mav.addObject("Video", video);
+        mav.addObject("commentList", commentList);
 
         mav.setViewName("playpage");
         return mav;

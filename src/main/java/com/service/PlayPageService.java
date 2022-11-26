@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +21,17 @@ public class PlayPageService {
     }
 
     public int insertComment(Review review) {
-        return playPageDao.insertComment(review);
+         playPageDao.insertComment(review);
+         return review.getNo();
+    }
+
+
+    public List<Review> selectCommentList(Review review) {
+        return playPageDao.selectCommentList(review);
+    }
+
+
+    public Review selectReviewNo(int comment) {
+        return playPageDao.selectReviewNo(comment);
     }
 }

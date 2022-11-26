@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Repository
 public class PlayPageDao {
@@ -24,5 +25,14 @@ public class PlayPageDao {
 
     public int insertComment(Review review) {
         return mapper.insertComment(review);
+    }
+
+
+    public List<Review> selectCommentList(Review review) {
+        return mapper.selectCommentList(review);
+    }
+
+    public Review selectReviewNo(int comment) {
+        return mapper.selectReviewNo(comment);
     }
 }

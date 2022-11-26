@@ -440,7 +440,7 @@
     /* 댓글 추가(append) */
 
     .comment_append {
-        margin-top: 50px;
+        margin-top: 10px;
         margin-left: 10px;
         display: flex;
     }
@@ -601,31 +601,16 @@
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("성공:", data);
+                    // comment element 생성
+                    // container에 comment element 넣기(append)
                 })
                 .catch((error) => {
                     console.log("실패:", error);
                 })
 
-            let tag = "";
-
-            tag += "<div class=\"comment_append\">";
-            tag += "<img src=\"../../resources/css/img/human.jpg\" class=\"align-self-start mr-3\" style=\'width: 30px; height: 30px; border-radius: 26px\'>";
-            tag += "<div class=\"comment_append_contents\">";
-            tag += "<div class=\"comment_append_accounttime\">";
-            tag += "<div class=\"comment_append_account\">" + "dddd" + "</div>";
-            tag += "<div class=\"comment_append_time\">" + "30분 전" + "</div>";
-            tag += "</div>";
-            tag += " <div class=\"comment_append_maincomment\"> test </div>";
-            tag += "<div class=\"comment_append_morecontainner\">";
-            tag += "<div class=\"comment_append_like\"><i class=\"fa-regular fa-thumbs-up comment_like\"></i>&nbsp6</div>";
-            tag += "<div class=\"comment_append_dislike\"><i class=\"fa-regular fa-thumbs-down\"></i>&nbsp8</div>";
-            tag += "<button class=\"comment_append_morecomment\">답글</button>";
-            tag += "</div>";
-
-            $("#comment_appends").append("<div>" + tag + "</div>");
-
-
         })
+
+
 
  // 답글 달기
 
@@ -801,10 +786,27 @@
                 <input type="button" value="취소" id="cancelBtn" name="cancelBtn" style="display: none;">
                 <input type="button" value="댓글" id="addBtn" name="addBtn" style="display: none;">
             </div>
+            <c:forEach var="item" items="${commentList}">
             <div class="comment_append"> <%--여기서부터 댓글 확인해야함--%>
-                <div id="comment_appends"></div>
-            </div>
 
+                    <div class="comment_append"> <%--여기서부터 댓글 확인해야함--%>
+                        <div id="comment_appends"></div>
+                        <img src="../../resources/css/img/human.jpg" class="align-self-start mr-3" style='width: 30px; height: 30px; border-radius: 26px'>
+                        <div class="comment_append_contents">
+                            <div class="comment_append_accounttime">
+                                <div class="comment_append_account">  dddd  </div>
+                                <div class="comment_append_time"> ${item.reg_datetime} </div>
+                            </div>
+                            <div class="comment_append_maincomment"> ${item.content} </div>
+                            <div class="comment_append_morecontainner">
+                                <div class="comment_append_like"><i class="fa-regular fa-thumbs-up comment_like"></i>&nbsp6</div>
+                                <div class="comment_append_dislike"><i class="fa-regular fa-thumbs-down"></i>&nbsp8</div>
+                                <button class="comment_append_morecomment">답글</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
     <!-- relatived contents -->

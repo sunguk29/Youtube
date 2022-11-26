@@ -41,6 +41,14 @@ public class PlayPageRestController {
     public ResponseEntity commentAdd(@RequestBody Review review){
 
         int comment = playPageService.insertComment(review);
+        Review reviewNo = playPageService.selectReviewNo(comment);
+
+        Review review1 = new Review(); // comment 번호갖고오는 용도(리뷰 객체 갖고와야함)
+
+        review1.setNo(comment);
+        review1.setContent(review.getContent());
+
+        message.put("review", review1);
 
         return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
     }

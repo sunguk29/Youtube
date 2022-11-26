@@ -19,4 +19,16 @@
         )
     </insert>
 
+    <select id="selectCommentList" resultType="com.model.Review">
+        select *
+        from review
+        where video_no = #{video_no}
+    </select>
+
+    <select id="selectReviewNo" resultType="com.model.Review">
+        select *
+        from review
+        where review_no = #{comment}
+    </select>
+
 </mapper>
