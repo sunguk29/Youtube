@@ -23,5 +23,6 @@ public class Review {
     private LocalDateTime reg_datetime;
     private DateTime update_datetime;
     private int review_no;
+    private String insert_reg_datetime;
 
 }

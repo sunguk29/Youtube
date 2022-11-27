@@ -566,6 +566,7 @@
 
 
 </style>
+<script src="../../resources/js/review.js"></script>
 <script>
     $(document).ready(function(){
 
@@ -585,7 +586,7 @@
 
             let content = $('#comment_add').val();
             let user_no = 13;
-            let video_no = ${video.no}
+            let video_no = ${video.no};
 
             fetch("/commentAdd",{
                 method: "POST",
@@ -601,68 +602,13 @@
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("성공:", data);
-                    // comment element 생성
-                    // container에 comment element 넣기(append)
+                    let container = document.getElementById('inserAppendComment');
+                    $(container).append(createReviewElement(data.data.review));
                 })
                 .catch((error) => {
                     console.log("실패:", error);
                 })
-
         })
-
-
-
- // 답글 달기
-
- $(".comment_append_morecomment").click(function (){
-     $(".comment_append_containner").show()
-     $("#comment_append_cancel").show()
-     $("#comment_append_add").show()
- })
-
- $("#comment_append_cancel").click(function (){
-     $(".comment_append_containner").hide()
-     $("#comment_append_add").hide()
-     $("#comment_append_cancel").hide()
- })
-
- $("#comment_append_add").click(function (){
-     $(".comment_append_commentofcomment").empty('')
-     $(".comment_append_containner").hide()
-     $("#comment_append_add").hide()
-     $("#comment_append_cancel").hide()
-     $('.comment_append_more').show()
-
-     // var div = document.createElement("div")
-     // div.classList.add("comment_contents")
-     // $('.comment_contents').css('display', 'flex')
-     // $('.comment_contents').css('flex-direction', 'row')
-     // $('.comment_contents').css('width', '170')
-     //
-     // $('.comment_append_contents_containner').append(div)
-
-     $('.comment_append_contents_containner').append(`
-             <div class="comment_contents">
-                 <img src="/web/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                 style="width: 30px; height: 30px; border-radius: 26px">
-                 <div>
-                     <div class="comment_append_accounttime">
-                         <div class="comment_append_account">dddd</div>
-                         <div class="comment_append_time">20분 전</div>
-                     </div>
-                     <div class="comment_append_commentofcomment"></div>
-                     <div class="comment_append_ldm">
-                         <div class="comment_append_like"><i class="fa-regular fa-thumbs-up comment_like"></i>&nbsp6</div>
-                         <div class="comment_append_dislike"><i class="fa-regular fa-thumbs-down"></i>&nbsp8</div>
-                         <button class="comment_append_morecomment">답글</button>
-                     </div>
-
-                 </div>
-
-             </div>`)
-     $(".comment_append_commentofcomment").append($(".comment_append_writing").val())
-     $(".comment_append_writing").val('')
- })
 
  // 대댓글 dropdown
 
@@ -795,7 +741,7 @@
                         <div class="comment_append_contents">
                             <div class="comment_append_accounttime">
                                 <div class="comment_append_account">  dddd  </div>
-                                <div class="comment_append_time"> ${item.reg_datetime} </div>
+                                <div class="comment_append_time"> ${item.insert_reg_datetime} </div>
                             </div>
                             <div class="comment_append_maincomment"> ${item.content} </div>
                             <div class="comment_append_morecontainner">
@@ -807,8 +753,12 @@
                     </div>
                 </div>
             </c:forEach>
+            <div id="inserAppendComment">
+
+            </div>
         </div>
     </div>
+
     <!-- relatived contents -->
     <div class="relatived_contents">
         <div class="relatived_contents_ads_containner">
@@ -845,11 +795,6 @@
         </c:forEach>
     </div>
 </div>
-
-
-<script>
-
-</script>
 
 </body>
 </html>

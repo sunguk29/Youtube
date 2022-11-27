@@ -23,6 +23,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Map;
@@ -38,17 +39,16 @@ public class PlayPageRestController {
     Gson gson = new Gson();
 
     @PostMapping("/commentAdd")
-    public ResponseEntity commentAdd(@RequestBody Review review){
+    public ResponseEntity commentAdd(@RequestBody Review review) throws ParseException {
 
         int comment = playPageService.insertComment(review);
         Review reviewNo = playPageService.selectReviewNo(comment);
 
-        Review review1 = new Review(); // comment 번호갖고오는 용도(리뷰 객체 갖고와야함)
+        Time time = new Time();
+        reviewNo.setInsert_reg_datetime(time.TimeFormatChatTimeString(reviewNo.getReg_datetime()));
+        message.put("review", reviewNo);
 
-        review1.setNo(comment);
-        review1.setContent(review.getContent());
-
-        message.put("review", review1);
+        log.info(String.valueOf(reviewNo));
 
         return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
     }

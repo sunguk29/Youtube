@@ -26,12 +26,14 @@ public class PlayPageService {
     }
 
 
-    public List<Review> selectCommentList(Review review) {
-        return playPageDao.selectCommentList(review);
-    }
+
 
 
     public Review selectReviewNo(int comment) {
         return playPageDao.selectReviewNo(comment);
+    }
+
+    public ArrayList<Review> selectCommentList(Review review) {
+        return playPageDao.selectCommentList(review);
     }
 }

@@ -28,11 +28,11 @@ public class PlayPageDao {
     }
 
 
-    public List<Review> selectCommentList(Review review) {
-        return mapper.selectCommentList(review);
-    }
-
     public Review selectReviewNo(int comment) {
         return mapper.selectReviewNo(comment);
+    }
+
+    public ArrayList<Review> selectCommentList(Review review) {
+        return mapper.selectCommentList(review);
     }
 }

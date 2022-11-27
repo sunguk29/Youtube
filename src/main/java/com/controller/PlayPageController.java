@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.lang.reflect.Array;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -91,13 +92,18 @@ public class PlayPageController {
 
         }
 
-        List<Review> commentList = playPageService.selectCommentList(review);
+        ArrayList<Review> commentList = playPageService.selectCommentList(review);
+
+        for(Review tmp: commentList){
+            tmp.setInsert_reg_datetime(times.TimeFormatChatTimeString(tmp.getReg_datetime()));
+        }
 
         log.info("videoList", videoList);
 
         mav.addObject("videoList", videoList);
         mav.addObject("playVideo", playVideo);
-        mav.addObject("Video", video);
+        mav.addObject("video", video);
+        mav.addObject("review", review);
         mav.addObject("commentList", commentList);
 
         mav.setViewName("playpage");
