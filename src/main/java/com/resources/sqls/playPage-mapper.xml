@@ -22,7 +22,7 @@
     <select id="selectCommentList" resultType="com.model.Review">
         select *
         from review
-        where video_no = #{video_no}
+        where video_no = #{video_no} and review_no = 0
     </select>
 
     <select id="selectReviewNo" resultType="com.model.Review">
@@ -30,5 +30,30 @@
         from review
         where review_no = #{comment}
     </select>
+
+    <select id="selectMoreCommentList" resultType="com.model.Review">
+        select *
+        from review
+        where video_no = #{video_no} and review_no > 0
+        order by review_no asc
+    </select>
+
+    <select id="selectMoreCommentCnt" resultType="Integer">
+        select count(*)
+        from review
+        where video_no = #{video_no} and review_no = #{no}
+    </select>
+
+    <select id="selectCommentCnt" resultType="Integer">
+        select count(*)
+        from review
+        where video_no = #{video_no} and review_no = 0
+    </select>
+
+    <update id="updateViews" parameterType="Integer">
+        update video
+        set views = ifnull(views, 0) + 1
+        where no = #{no}
+    </update>
 
 </mapper>

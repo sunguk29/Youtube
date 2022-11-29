@@ -16,4 +16,12 @@ public interface PlayPageMapper {
     Review selectReviewNo(int comment);
 
     ArrayList<Review> selectCommentList(Review review);
+
+    ArrayList<Review> selectMoreCommentList(Review review);
+
+    int selectMoreCommentCnt(Review review);
+
+    int selectCommentCnt(Review review);
+
+    int updateViews(int no);
 }

@@ -510,6 +510,7 @@
 
     /*대댓글*/
 
+
     .comment_append_writing_containner {
         float: right;
         margin-top: -5px;
@@ -563,6 +564,26 @@
         opacity: inherit;
     }
 
+    .videoTimeBackGround {
+        position: absolute;
+        top: 78px;
+        left: 128px;
+        background-color: black;
+        width: 40px;
+        height: 14px;
+        /*z-index: 2;*/
+        /*border: 1px solid #000;*/
+
+    }
+
+    .videoTime {
+        position: absolute;
+        top: 5px;
+        left: 6px;
+        z-index: 3;
+        line-height: 0.5;
+        font-size: 11px;
+    }
 
 
 </style>
@@ -612,12 +633,8 @@
 
  // 대댓글 dropdown
 
- $('.comment_append_more').click(function (){
-     if(($('.comment_append_contents_containner').css('display') == 'none')){
-         $('.comment_append_contents_containner').show();
-     } else {
-         $('.comment_append_contents_containner').hide();
-     }
+ $('.comment_append_morecomment').click(function (){
+     $('.morecomment_append').show();
  })
 
  // 연관동영상 드롭다운
@@ -664,7 +681,7 @@
                 <div class="video_title">${playVideo.title}</div>
                 <div class="video_des_containner">
                     <div>
-                        <span>조회수 316,526회</span>
+                        <span>조회수 ${playVideo.views}회</span>
                         <span>· ${playVideo.reg_datetime}</span>
                     </div>
                     <div class="like_sharing_store">
@@ -716,8 +733,7 @@
         <!-- main video comment-->
         <div class="main_video_comment">
             <div class="comment_summary">
-                <div style="font-size: 16px">댓글 460개</div>
-                <div style="font-size: 14px; margin-left: 20px"><i class="fa-solid fa-bars"></i> 정렬기준</div>
+                <div style="font-size: 16px">댓글 ${commentCnt}개</div>
             </div>
             <form action="/commentAdd.do" method="post" id="commentAdd">
             <div class="media comment_writing">
@@ -734,7 +750,6 @@
             </div>
             <c:forEach var="item" items="${commentList}">
             <div class="comment_append"> <%--여기서부터 댓글 확인해야함--%>
-
                     <div class="comment_append"> <%--여기서부터 댓글 확인해야함--%>
                         <div id="comment_appends"></div>
                         <img src="../../resources/css/img/human.jpg" class="align-self-start mr-3" style='width: 30px; height: 30px; border-radius: 26px'>
@@ -752,6 +767,36 @@
                         </div>
                     </div>
                 </div>
+                <%--대댓글--%>
+                <c:forEach var="items" items="${moreCommentList}">
+                    <c:choose>
+                        <c:when test="${item.no eq items.review_no} ">
+                        <%--<c:when test="${item.no} eq ${items.review_no} ">--%>
+                            <div> 답글  개 </div>
+                            <div class="morecomment_append" > <%--display: none--%>
+                                <div class="morecomment_append">
+                                    <div id="morecomment_appends"></div>
+                                    <img src="../../resources/css/img/human.jpg" class="align-self-start mr-3" style='width: 30px; height: 30px; border-radius: 26px'>
+                                    <div class="morecomment_append_contents">
+
+                                        <div class="morecomment_append_accounttime">
+                                            <div class="morecomment_append_account">  ${item.no} + ${items.review_no}  </div>
+                                            <div class="morecomment_append_time"> ${items.insert_reg_datetime} </div>
+                                        </div>
+                                        <div class="morecomment_append_maincomment"> ${items.content} </div>
+                                        <div class="morecomment_append_morecontainner">
+                                            <div class="comment_append_like"><i class="fa-regular fa-thumbs-up comment_like"></i>&nbsp6</div>
+                                            <div class="comment_append_dislike"><i class="fa-regular fa-thumbs-down"></i>&nbsp8</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            이게나오면 어떡하지
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
             </c:forEach>
             <div id="inserAppendComment">
 
@@ -768,13 +813,19 @@
         <c:forEach var="item" items="${videoList}">
         <div class="search_list_containner">
             <div class="media">
-                <img class="mr-3" src=${item.thumbnail_mfile.url} alt="Generic placeholder image">
+                <a href="playpage.do?no=${item.no}">
+                <img class="mr-3" style="width: 168px; height: 94px;" src=${item.thumbnail_mfile.url}>
+                </a>
+                <div class="videoTimeBackGround">
+                    <span class="videoTime" style="color: white; font-size: 14px;">${item.time}</span>
+                    <span class="videoHover" style="font-size:10px;"></span>
+                </div>
                 <div class="media-body">
                     <div class="mt_0">${item.title}</div>
                     <div class="search_list_sub_media">
                         <div class="search_list_writer">게시자</div>
                         <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
+                            <div class="search_list_view">조회수 ${item.views}회</div>
                             <div class="search_list_reg_date">·${item.compare_reg_datetime}</div>
                         </div>
                     </div>

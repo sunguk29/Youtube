@@ -38,6 +38,8 @@ public class PlayPageController {
         review.setVideo_no(no);
 
         Video playVideo = playPageService.selectVideo(video);
+        int updateViews = playPageService.updateViews(no);
+
         ArrayList<Video> videoList = homeService.selectVideoList(video);
 
         playVideo.setVideo_mfile(new Gson().fromJson(playVideo.getVideoFile(), MFile.class));
@@ -98,6 +100,12 @@ public class PlayPageController {
             tmp.setInsert_reg_datetime(times.TimeFormatChatTimeString(tmp.getReg_datetime()));
         }
 
+        ArrayList<Review> moreCommentList = playPageService.selectMoreCommentList(review);
+
+        int commentCnt = playPageService.selectCommentCnt(review);
+        int moreCommentCnt = playPageService.selectMoreCommentCnt(review);
+
+
         log.info("videoList", videoList);
 
         mav.addObject("videoList", videoList);
@@ -105,6 +113,9 @@ public class PlayPageController {
         mav.addObject("video", video);
         mav.addObject("review", review);
         mav.addObject("commentList", commentList);
+        mav.addObject("moreCommentList", moreCommentList);
+        mav.addObject("commentCnt", commentCnt);
+        mav.addObject("moreCommentCnt", moreCommentCnt);
 
         mav.setViewName("playpage");
         return mav;

@@ -36,4 +36,21 @@ public class PlayPageService {
     public ArrayList<Review> selectCommentList(Review review) {
         return playPageDao.selectCommentList(review);
     }
+
+    public ArrayList<Review> selectMoreCommentList(Review review) {
+        return playPageDao.selectMoreCommentList(review);
+    }
+
+    public int selectMoreCommentCnt(Review review) {
+        return playPageDao.selectMoreCommentCnt(review);
+    }
+
+    public int selectCommentCnt(Review review) {
+        return playPageDao.selectCommentCnt(review);
+    }
+
+
+    public int updateViews(int no) {
+        return playPageDao.updateViews(no);
+    }
 }
