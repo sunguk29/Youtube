@@ -886,7 +886,7 @@
                                     </div>
                                         <%--채널이름 필요할거같음--%>
                                     <p class="video_info" style="font-size: 14px;">User</p>
-                                    <p class="video_info" style="font-size: 14px;"> 조회수 ${item.views}
+                                    <p class="video_info" style="font-size: 14px;"> 조회수 ${item.views}회
                                         ·${item.compare_reg_datetime}</p>
                                 </div>
                             </div>

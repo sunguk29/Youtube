@@ -29,8 +29,8 @@ public class PlayPageService {
 
 
 
-    public Review selectReviewNo(int comment) {
-        return playPageDao.selectReviewNo(comment);
+    public Review selectReviewNo(Review review) {
+        return playPageDao.selectReviewNo(review);
     }
 
     public ArrayList<Review> selectCommentList(Review review) {

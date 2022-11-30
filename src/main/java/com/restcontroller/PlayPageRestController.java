@@ -42,7 +42,7 @@ public class PlayPageRestController {
     public ResponseEntity commentAdd(@RequestBody Review review) throws ParseException {
 
         int comment = playPageService.insertComment(review);
-        Review reviewNo = playPageService.selectReviewNo(comment);
+        Review reviewNo = playPageService.selectReviewNo(review);
 
         Time time = new Time();
         reviewNo.setInsert_reg_datetime(time.TimeFormatChatTimeString(reviewNo.getReg_datetime()));

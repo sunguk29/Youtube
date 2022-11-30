@@ -13,7 +13,7 @@ public interface PlayPageMapper {
 
     int insertComment(Review review);
 
-    Review selectReviewNo(int comment);
+    Review selectReviewNo(Review review);
 
     ArrayList<Review> selectCommentList(Review review);
 

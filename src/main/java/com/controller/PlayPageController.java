@@ -102,6 +102,10 @@ public class PlayPageController {
 
         ArrayList<Review> moreCommentList = playPageService.selectMoreCommentList(review);
 
+        for(Review tmp: moreCommentList){
+            tmp.setInsert_reg_datetime(times.TimeFormatChatTimeString(tmp.getReg_datetime()));
+        }
+
         int commentCnt = playPageService.selectCommentCnt(review);
         int moreCommentCnt = playPageService.selectMoreCommentCnt(review);
 

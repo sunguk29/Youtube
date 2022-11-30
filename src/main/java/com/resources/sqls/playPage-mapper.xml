@@ -28,7 +28,7 @@
     <select id="selectReviewNo" resultType="com.model.Review">
         select *
         from review
-        where review_no = #{comment}
+        where no = #{no}
     </select>
 
     <select id="selectMoreCommentList" resultType="com.model.Review">

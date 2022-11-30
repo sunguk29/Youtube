@@ -510,6 +510,54 @@
 
     /*대댓글*/
 
+    .morecomment_append {
+        margin-top: 10px;
+        margin-left: 40px;
+        display: flex;
+    }
+
+    .morecomment_append_view {
+        margin-left: 70px;
+    }
+
+    .morecomment_append_contents {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .morecomment_append_accounttime {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .morecomment_append_account {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .morecomment_append_time {
+        margin-left: 5px;
+        font-size: 12px;
+    }
+
+    .morecomment_append_maincomment {
+        width: 100%;
+        word-break: break-word;
+        white-space: pre-wrap;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .morecomment_append_morecontainner {
+        display: flex;
+        flex-direction: row;
+        top: 40px;
+        font-size: 12px;
+        height: 30px;
+        width: 100%;
+    }
+
 
     .comment_append_writing_containner {
         float: right;
@@ -629,13 +677,65 @@
                 .catch((error) => {
                     console.log("실패:", error);
                 })
+            $('#comment_add').val('');
         })
 
  // 대댓글 dropdown
 
- $('.comment_append_morecomment').click(function (){
-     $('.morecomment_append').show();
+ $('.morecomment_append_view').click(function (){
+     if($('.morecomment_append').css('display') == 'none'){
+         $('.morecomment_append').show();
+     } else {
+         $('.morecomment_append').hide();
+     }
  })
+
+    $('.comment_append_morecomment').click(function (){
+
+        $('.more_comment_add_container').show();
+    })
+
+    $('#more_comment_add').click(function (){
+        $('#moreCancelBtn').show();
+        $('#moreAddBtn').show();
+    })
+
+    $('#moreCancelBtn').click(function (){
+        $('.more_comment_add_container').hide();
+    });
+
+    $('#moreAddBtn').click(function (){
+
+        let content = $('#more_comment_add').val();
+        let user_no = 13;
+        let video_no = ${video.no};
+        //let review_no = ${review.no};
+
+        //console.log(review_no);
+
+        /*fetch("/moreCommentAdd",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                content,
+                user_no,
+                video_no,
+                review_no
+            }),
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log("성공:", data);
+                let container = document.getElementById('inserAppendComment');
+                $(container).append(createReviewElement(data.data.review));
+            })
+            .catch((error) => {
+                console.log("실패:", error);
+            })*/
+
+    })
 
  // 연관동영상 드롭다운
  $('.dropdownMenuButton').click(function (){
@@ -650,12 +750,12 @@
 <!-- top -->
 <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 4;">
     <div class="container-fluid header_layout">
-        <!-- rogo -->
+        <a href="/"><img src="/resources/css/img/youtube.png"  style="position: absolute; width: 100px; height: 40px; top: 10px; left: 40px;"></a>
         <div>
 
         </div>
         <div class="row top_layout">
-            <div class="input-group mb-3 ">
+            <div class="input-group mb-3 " style="margin-right: 260px;">
                 <input type="text" class="form-control" placeholder="검색">
                 <span class="btn input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
@@ -767,20 +867,40 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="more_comment_add_container" style="display: none">
+                <form action="/moreCommentAdd.do" method="post" id="moreCommentAdd">
+                    <div class="media comment_writing">
+                        <img src="/web/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+                             style="width: 30px; height: 30px; border-radius: 26px">
+                        <div class="media-body">
+                            <input type="text" id="more_comment_add" class="more_comment_add" placeholder="댓글 추가..." style="width: 110%;">
+                        </div>
+                    </div>
+                </form>
+
+                <div class="comment-fnc">
+                    <input type="button" value="취소" id="moreCancelBtn" name="cancelBtn" style="display: none;">
+                    <input type="button" value="댓글" id="moreAddBtn" name="addBtn" style="display: none;">
+                </div>
+                </div>
+
+                <div class="morecomment_append_view"> 답글 ${moreCommentCnt} 개 </div>
                 <%--대댓글--%>
                 <c:forEach var="items" items="${moreCommentList}">
+
                     <c:choose>
-                        <c:when test="${item.no eq items.review_no} ">
+                        <c:when test="${item.no eq items.review_no}">
                         <%--<c:when test="${item.no} eq ${items.review_no} ">--%>
-                            <div> 답글  개 </div>
-                            <div class="morecomment_append" > <%--display: none--%>
+
+                            <div class="morecomment_append" style="display: none" >
                                 <div class="morecomment_append">
                                     <div id="morecomment_appends"></div>
                                     <img src="../../resources/css/img/human.jpg" class="align-self-start mr-3" style='width: 30px; height: 30px; border-radius: 26px'>
                                     <div class="morecomment_append_contents">
 
                                         <div class="morecomment_append_accounttime">
-                                            <div class="morecomment_append_account">  ${item.no} + ${items.review_no}  </div>
+                                            <div class="morecomment_append_account"> dddd </div>
                                             <div class="morecomment_append_time"> ${items.insert_reg_datetime} </div>
                                         </div>
                                         <div class="morecomment_append_maincomment"> ${items.content} </div>
@@ -793,7 +913,7 @@
                             </div>
                         </c:when>
                         <c:otherwise>
-                            이게나오면 어떡하지
+
                         </c:otherwise>
                     </c:choose>
                 </c:forEach>
