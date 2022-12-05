@@ -94,16 +94,20 @@ public class PlayPageController {
 
         }
 
+
         ArrayList<Review> commentList = playPageService.selectCommentList(review);
 
-        for(Review tmp: commentList){
-            tmp.setInsert_reg_datetime(times.TimeFormatChatTimeString(tmp.getReg_datetime()));
-        }
+        for(Review item: commentList){
+            item.setInsert_reg_datetime(times.TimeFormatChatTimeString(item.getReg_datetime()));
 
-        ArrayList<Review> moreCommentList = playPageService.selectMoreCommentList(review);
+            ArrayList<Review> rereviews = playPageService.selectMoreCommentList(item.getNo(), item.getVideo_no());
+            item.setRereviews(rereviews);
 
-        for(Review tmp: moreCommentList){
-            tmp.setInsert_reg_datetime(times.TimeFormatChatTimeString(tmp.getReg_datetime()));
+            for(Review rereview: rereviews){
+                rereview.setInsert_reg_datetime(times.TimeFormatChatTimeString(rereview.getReg_datetime()));
+
+            }
+
         }
 
         int commentCnt = playPageService.selectCommentCnt(review);
@@ -117,7 +121,6 @@ public class PlayPageController {
         mav.addObject("video", video);
         mav.addObject("review", review);
         mav.addObject("commentList", commentList);
-        mav.addObject("moreCommentList", moreCommentList);
         mav.addObject("commentCnt", commentCnt);
         mav.addObject("moreCommentCnt", moreCommentCnt);
 

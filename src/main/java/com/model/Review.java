@@ -8,6 +8,7 @@ import lombok.ToString;
 import org.joda.time.DateTime;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @RequiredArgsConstructor
 @Data
@@ -24,5 +25,6 @@ public class Review {
     private DateTime update_datetime;
     private int review_no;
     private String insert_reg_datetime;
+    private ArrayList<Review> rereviews;
 
 }

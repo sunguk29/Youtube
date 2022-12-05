@@ -36,9 +36,7 @@ public class PlayPageDao {
         return mapper.selectCommentList(review);
     }
 
-    public ArrayList<Review> selectMoreCommentList(Review review) {
-        return mapper.selectMoreCommentList(review);
-    }
+
 
     public int selectMoreCommentCnt(Review review) {
         return mapper.selectMoreCommentCnt(review);
@@ -51,5 +49,9 @@ public class PlayPageDao {
 
     public int updateViews(int no) {
         return mapper.updateViews(no);
+    }
+
+    public ArrayList<Review> selectMoreCommentList(int no, int video_no) {
+        return mapper.selectMoreCommentList(no,video_no);
     }
 }
