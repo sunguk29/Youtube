@@ -673,6 +673,7 @@
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("성공:", data);
+                    console.log(data.data);
                     let container = document.getElementById('inserAppendComment');
                     $(container).append(createReviewElement(data.data.review));
                 })
@@ -697,6 +698,7 @@
         })
 
         $('.comment_append_morecomment').click(function () {
+            console.log('test1');
 
             let more_add = this.closest('.comment_list');
             let more_adds = more_add.querySelector('.more_comment_add_container');
@@ -707,29 +709,41 @@
                 more_adds.style.display = 'none';
             }
 
-            console.log(more_adds);
+            //console.log(more_adds);
 
         })
 
-        $('#more_comment_add').click(function () {
+        $('.moreCancelBtn').click(function () {
+            console.log('btnTest');
+
+            let cancel_btn = this.closest('.more_comment_add_container');
+            //console.log('cancel_btn' + cancel_btn.innerHTML);
+            cancel_btn.style.display = 'none';
+        })
+
+        /*$('#more_comment_add').click(function () {
             $('#moreCancelBtn').show();
             $('#moreAddBtn').show();
-        })
+        })*/
 
-        $('#moreCancelBtn').click(function () {
-            $('.more_comment_add_container').hide();
-        });
+        $('.moreAddBtn').click(function () {
 
-        $('#moreAddBtn').click(function () {
+            let comment_no = this.closest('.more_comment_add_container');
+            let comment_real_no = comment_no.dataset.number;
 
-            let content = $('#more_comment_add').val();
+            let contents = comment_no.querySelector('.more_comment_add');
+            let content = $(contents).val();
+
             let user_no = 13;
             let video_no = ${video.no};
-            //let review_no = ${review.no};
+            let review_no = comment_real_no;
 
-            //console.log(review_no);
+            if(content == null || content == ''){
+                alert('댓글을 입력하십시오');
+                return false;
+            }
 
-            /*fetch("/moreCommentAdd",{
+            fetch("/moreCommentAdd",{
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -744,12 +758,19 @@
                 .then((response) => response.json())
                 .then((data) => {
                     console.log("성공:", data);
-                    let container = document.getElementById('inserAppendComment');
+                    confirm('댓글이 입력되었습니다.');
+                    $('.more_comment_add').val('');
+
+                    let add_container = this.closest('.comment_list');
+                    let container = add_container.querySelector('.moreAppendComment');
+                    console.log(container);
+                    //let container = document.querySelector('.moreAppendComment');
+                    console.log(data.data);
                     $(container).append(createReviewElement(data.data.review));
                 })
                 .catch((error) => {
                     console.log("실패:", error);
-                })*/
+                })
 
         })
 
@@ -855,7 +876,7 @@
             </div>
             <form action="/commentAdd.do" method="post" id="commentAdd">
                 <div class="media comment_writing">
-                    <img src="/web/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+                    <img src="../../resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
                          style="width: 30px; height: 30px; border-radius: 26px">
                     <div class="media-body">
                         <input type="text" id="comment_add" class="comment_add" placeholder="댓글 추가..."
@@ -897,23 +918,20 @@
                             </div>
                         </div>
 
-                        <div class="more_comment_add_container" style="display: none">
+                        <div class="more_comment_add_container" style="display: none" data-number="${item.no}">
                             <form action="/moreCommentAdd.do" method="post" id="moreCommentAdd">
                                 <div class="media comment_writing">
                                     <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
                                          style="width: 30px; height: 30px; border-radius: 26px">
                                     <div class="media-body">
-                                        <input type="text" id="more_comment_add" class="more_comment_add"
-                                               placeholder="댓글 추가..."
-                                               style="width: 110%;">
+                                        <input type="text" class="more_comment_add" placeholder="댓글 추가..." style="width: 110%;">
                                     </div>
                                 </div>
                             </form>
 
-                            <div class="comment-fnc">
-                                <input type="button" value="취소" id="moreCancelBtn" name="cancelBtn"
-                                       style="display: none;">
-                                <input type="button" value="댓글" id="moreAddBtn" name="addBtn" style="display: none;">
+                            <div class="comment-fnc" id="more_comment">
+                                <input type="button" value="취소" class="moreCancelBtn" name="cancelBtn">
+                                <input type="button" value="댓글" class="moreAddBtn" name="addBtn" >
                             </div>
                         </div>
 
@@ -947,6 +965,9 @@
                                     </div>
                                 </div>
                             </c:forEach>
+                            <div class="moreAppendComment" style="margin-left: 60px;">
+
+                            </div>
                         </div>
                     </div>
                     <%--대댓글--%>

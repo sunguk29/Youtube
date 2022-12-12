@@ -37,6 +37,7 @@ public class PlayPageRestController {
 
     Message message = new Message();
     Gson gson = new Gson();
+    Time time = new Time();
 
     @PostMapping("/commentAdd")
     public ResponseEntity commentAdd(@RequestBody Review review) throws ParseException {
@@ -44,7 +45,22 @@ public class PlayPageRestController {
         int comment = playPageService.insertComment(review);
         Review reviewNo = playPageService.selectReviewNo(review);
 
-        Time time = new Time();
+
+        reviewNo.setInsert_reg_datetime(time.TimeFormatChatTimeString(reviewNo.getReg_datetime()));
+        message.put("review", reviewNo);
+
+        log.info(String.valueOf(reviewNo));
+
+        return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
+    }
+
+    @PostMapping("/moreCommentAdd")
+    public ResponseEntity moreCommentAdd(@RequestBody Review review) throws ParseException {
+
+        int moreComment = playPageService.insertMoreComment(review);
+        Review reviewNo = playPageService.selectReviewNo(review);
+
+
         reviewNo.setInsert_reg_datetime(time.TimeFormatChatTimeString(reviewNo.getReg_datetime()));
         message.put("review", reviewNo);
 

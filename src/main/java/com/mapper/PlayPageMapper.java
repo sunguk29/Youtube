@@ -25,4 +25,6 @@ public interface PlayPageMapper {
     int updateViews(int no);
 
     ArrayList<Review> selectMoreCommentList(@Param("no") int no,@Param("video_no") int video_no);
+
+    int insertMoreComment(Review review);
 }

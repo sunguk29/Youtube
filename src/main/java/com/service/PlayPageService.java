@@ -55,4 +55,8 @@ public class PlayPageService {
     public ArrayList<Review> selectMoreCommentList(int no, int video_no) {
         return playPageDao.selectMoreCommentList(no,video_no);
     }
+
+    public int insertMoreComment(Review review) {
+        return playPageDao.insertMoreComment(review);
+    }
 }
