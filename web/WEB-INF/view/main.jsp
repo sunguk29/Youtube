@@ -7,6 +7,7 @@
     <meta charset="utf-8">
     <meta name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="google-signin-client_id" content="558731967747-jev153qunta4ipl2s3p3dunvj3sn0ku3.apps.googleusercontent.com">
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
             integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
@@ -383,7 +384,7 @@
 
     .make_video {
         position: absolute;
-        left: 1000px;
+        left: 1050px;
         z-index: 5;
         background: none;
         border: none;
@@ -634,6 +635,7 @@
                     <span class="btn input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
             <button class="make_video"><i class="fa-solid fa-video"></i></button>
+            <div id="buttonDiv"></div>
         </div>
         <!-- account and alarm -->
         <div>
@@ -1034,7 +1036,24 @@
 </div>
 
 <script src="https://unpkg.com/@api.video/video-uploader" defer></script>
+<%--<script src="https://apis.google.com/js/platform.js" async defer></script>--%>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
+
+    function handleCredentialResponse(response) {
+        console.log("Encoded JWT ID token: " + response.credential);
+    }
+    window.onload = function () {
+        google.accounts.id.initialize({
+            client_id: "558731967747-jev153qunta4ipl2s3p3dunvj3sn0ku3.apps.googleusercontent.com",
+            callback: handleCredentialResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("buttonDiv"),
+            { theme: "outline", size: "large" }  // customization attributes
+        );
+        google.accounts.id.prompt(); // also display the One Tap dialog
+    }
 
     var postData = {
         lastNo: 123
