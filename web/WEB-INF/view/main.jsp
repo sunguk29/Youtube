@@ -1042,6 +1042,21 @@
 
     function handleCredentialResponse(response) {
         console.log("Encoded JWT ID token: " + response.credential);
+        /*백엔드 서버로 인증*/
+        var id_token = response.credential;
+
+        fetch("/googleLogin", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify(id_token),
+        }).then((response) => {
+            console.log("성공",  response);
+
+        })
+
     }
     window.onload = function () {
         google.accounts.id.initialize({
