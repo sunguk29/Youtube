@@ -3,6 +3,7 @@ package com.restcontroller;
 import com.api.sns.kakao.KakaoInfo;
 import com.aws.file.FileUploadUtility;
 import com.google.gson.Gson;
+import com.model.Review;
 import com.model.Video;
 import com.model.common.MFile;
 import com.response.DefaultRes;
@@ -277,6 +278,15 @@ public class HomeRestController {
 //        return new ResponseEntity(DefaultRes.res(HttpStatus.OK, message), HttpStatus.OK);
 ////        return mav;
 //    }
+
+    @PostMapping("/googleLogin")
+    public ResponseEntity googleLogin(@RequestBody String params){
+
+        //log.info("aaaaaaaaaaaaaa" + String.valueOf(params));
+        log.info("bbbbbbbbbbbb" + params);
+
+        return new ResponseEntity(DefaultRes.res(HttpStatus.OK), HttpStatus.OK);
+    }
 
 
 

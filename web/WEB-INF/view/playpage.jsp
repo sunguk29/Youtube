@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -48,7 +50,8 @@
     .btn:focus, .btn:active {
         outline: none !important;
         box-shadow: none !important;
-        background-color: black; !important;
+        background-color: black;
+    !important;
     }
 
     input:focus, input:active {
@@ -144,7 +147,7 @@
         top: 600px;
         width: 100%;
         height: 95px;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .video_containner {
@@ -156,6 +159,7 @@
         font-weight: 400;
         line-height: 1.5rem;
     }
+
     .video_title {
         margin-top: -10px;
         margin-bottom: -5px;
@@ -184,7 +188,7 @@
         top: 705px;
         width: 100%;
         height: 300px;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .account_des {
@@ -345,7 +349,7 @@
     .relatived_contents_ads_containner {
         width: 100%;
         height: 110px;
-        border-bottom: 1px solid rgba(0,0,0,0.1);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
     .relatived_contents_ads {
@@ -424,7 +428,7 @@
 
     .comment-fnc {
         float: right;
-        margin-top:10px;
+        margin-top: 10px;
     }
 
     #addBtn, #cancelBtn {
@@ -438,7 +442,7 @@
     /* 댓글 추가(append) */
 
     .comment_append {
-        margin-top: 50px;
+        margin-top: 10px;
         margin-left: 10px;
         display: flex;
     }
@@ -508,6 +512,55 @@
 
     /*대댓글*/
 
+    .morecomment_append {
+        margin-top: 10px;
+        margin-left: 40px;
+        display: flex;
+    }
+
+    .morecomment_append_view {
+        margin-left: 70px;
+    }
+
+    .morecomment_append_contents {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .morecomment_append_accounttime {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .morecomment_append_account {
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    .morecomment_append_time {
+        margin-left: 5px;
+        font-size: 12px;
+    }
+
+    .morecomment_append_maincomment {
+        width: 100%;
+        word-break: break-word;
+        white-space: pre-wrap;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    .morecomment_append_morecontainner {
+        display: flex;
+        flex-direction: row;
+        top: 40px;
+        font-size: 12px;
+        height: 30px;
+        width: 100%;
+    }
+
+
     .comment_append_writing_containner {
         float: right;
         margin-top: -5px;
@@ -561,93 +614,168 @@
         opacity: inherit;
     }
 
+    .videoTimeBackGround {
+        position: absolute;
+        top: 78px;
+        left: 128px;
+        background-color: black;
+        width: 40px;
+        height: 14px;
+        /*z-index: 2;*/
+        /*border: 1px solid #000;*/
+
+    }
+
+    .videoTime {
+        position: absolute;
+        top: 5px;
+        left: 6px;
+        z-index: 3;
+        line-height: 0.5;
+        font-size: 11px;
+    }
 
 
 </style>
+<script src="../../resources/js/review.js"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
 
         // 첫 댓글 달기
-        $("#comment_add").click(function (){
+        $("#comment_add").click(function () {
             // $("#comment_add").css("","none")
             $("#addBtn").show()
             $("#cancelBtn").show()
         })
 
-        $("#cancelBtn").click(function (){
+        $("#cancelBtn").click(function () {
             $("#addBtn").hide()
             $("#cancelBtn").hide()
         })
 
-        $("#addBtn").click(function (){
-            $('.comment_append_maincomment').empty('')
-            $(".comment_append_maincomment").append($("#comment_add").val())
-            $('#comment_add').val('')
-        })
+        $("#addBtn").click(function () {
 
-        // 답글 달기
-        $(".comment_append_morecomment").click(function (){
-            $(".comment_append_containner").show()
-            $("#comment_append_cancel").show()
-            $("#comment_append_add").show()
-        })
+            let content = $('#comment_add').val();
+            let user_no = 13;
+            let video_no = ${video.no};
 
-        $("#comment_append_cancel").click(function (){
-            $(".comment_append_containner").hide()
-            $("#comment_append_add").hide()
-            $("#comment_append_cancel").hide()
-        })
-
-        $("#comment_append_add").click(function (){
-            $(".comment_append_commentofcomment").empty('')
-            $(".comment_append_containner").hide()
-            $("#comment_append_add").hide()
-            $("#comment_append_cancel").hide()
-            $('.comment_append_more').show()
-
-            // var div = document.createElement("div")
-            // div.classList.add("comment_contents")
-            // $('.comment_contents').css('display', 'flex')
-            // $('.comment_contents').css('flex-direction', 'row')
-            // $('.comment_contents').css('width', '170')
-            //
-            // $('.comment_append_contents_containner').append(div)
-
-            $('.comment_append_contents_containner').append(`
-                    <div class="comment_contents">
-                        <img src="/web/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                        style="width: 30px; height: 30px; border-radius: 26px">
-                        <div>
-                            <div class="comment_append_accounttime">
-                                <div class="comment_append_account">dddd</div>
-                                <div class="comment_append_time">20분 전</div>
-                            </div>
-                            <div class="comment_append_commentofcomment"></div>
-                            <div class="comment_append_ldm">
-                                <div class="comment_append_like"><i class="fa-regular fa-thumbs-up comment_like"></i>&nbsp6</div>
-                                <div class="comment_append_dislike"><i class="fa-regular fa-thumbs-down"></i>&nbsp8</div>
-                                <button class="comment_append_morecomment">답글</button>
-                            </div>
-
-                        </div>
-
-                    </div>`)
-            $(".comment_append_commentofcomment").append($(".comment_append_writing").val())
-            $(".comment_append_writing").val('')
+            fetch("/commentAdd", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    content,
+                    user_no,
+                    video_no
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("성공:", data);
+                    console.log(data.data);
+                    let container = document.getElementById('inserAppendComment');
+                    $(container).append(createReviewElement(data.data.review));
+                })
+                .catch((error) => {
+                    console.log("실패:", error);
+                })
+            $('#comment_add').val('');
         })
 
         // 대댓글 dropdown
 
-        $('.comment_append_more').click(function (){
-            if(($('.comment_append_contents_containner').css('display') == 'none')){
-                $('.comment_append_contents_containner').show();
+        $('.morecomment_append_view').click(function () {
+            let comment = this.closest('.comment_list');
+            let comment_container = comment.querySelector('.recomment_container');
+            console.log(comment_container);
+
+            if (comment_container.style.display !== 'block') {
+                comment_container.style.display = 'block'; //open logic
             } else {
-                $('.comment_append_contents_containner').hide();
+                comment_container.style.display = 'none'; //open logic
             }
         })
 
+        $('.comment_append_morecomment').click(function () {
+            console.log('test1');
+
+            let more_add = this.closest('.comment_list');
+            let more_adds = more_add.querySelector('.more_comment_add_container');
+
+            if (more_adds.style.display !== 'block') {
+                more_adds.style.display = 'block';
+            } else {
+                more_adds.style.display = 'none';
+            }
+
+            //console.log(more_adds);
+
+        })
+
+        $('.moreCancelBtn').click(function () {
+            console.log('btnTest');
+
+            let cancel_btn = this.closest('.more_comment_add_container');
+            //console.log('cancel_btn' + cancel_btn.innerHTML);
+            cancel_btn.style.display = 'none';
+        })
+
+        /*$('#more_comment_add').click(function () {
+            $('#moreCancelBtn').show();
+            $('#moreAddBtn').show();
+        })*/
+
+        $('.moreAddBtn').click(function () {
+
+            let comment_no = this.closest('.more_comment_add_container');
+            let comment_real_no = comment_no.dataset.number;
+
+            let contents = comment_no.querySelector('.more_comment_add');
+            let content = $(contents).val();
+
+            let user_no = 13;
+            let video_no = ${video.no};
+            let review_no = comment_real_no;
+
+            if(content == null || content == ''){
+                alert('댓글을 입력하십시오');
+                return false;
+            }
+
+            fetch("/moreCommentAdd",{
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    content,
+                    user_no,
+                    video_no,
+                    review_no
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("성공:", data);
+                    confirm('댓글이 입력되었습니다.');
+                    $('.more_comment_add').val('');
+
+                    let add_container = this.closest('.comment_list');
+                    let container = add_container.querySelector('.moreAppendComment');
+                    console.log(container);
+                    //let container = document.querySelector('.moreAppendComment');
+                    console.log(data.data);
+                    $(container).append(createReviewElement(data.data.review));
+                })
+                .catch((error) => {
+                    console.log("실패:", error);
+                })
+
+        })
+
         // 연관동영상 드롭다운
-        $('.dropdownMenuButton').click(function (){
+        $('.dropdownMenuButton').click(function () {
 
         })
 
@@ -659,12 +787,13 @@
 <!-- top -->
 <header style="position: fixed; top: 0; left: 0; width: 100%; z-index: 4;">
     <div class="container-fluid header_layout">
-        <!-- rogo -->
+        <a href="/"><img src="/resources/css/img/youtube.png"
+                         style="position: absolute; width: 100px; height: 40px; top: 10px; left: 40px;"></a>
         <div>
 
         </div>
         <div class="row top_layout">
-            <div class="input-group mb-3 ">
+            <div class="input-group mb-3 " style="margin-right: 260px;">
                 <input type="text" class="form-control" placeholder="검색">
                 <span class="btn input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
@@ -681,17 +810,19 @@
     <div class="main_contents ">
         <!-- main video -->
         <div class="main_video">
-            <img src="/web/resources/css/img/dog.png" class="main_video_contents" alt="...">
+            <video src=${playVideo.video_mfile.url} class="main_video_contents" alt="..." autoplay="autoplay"
+                   muted="muted" controls="true">
+            </video>
         </div>
         <!-- main video explation-->
         <div class="main_video_des">
             <div class="video_containner">
                 <a class="video_popularity">게임 인기 급상승 동영상 #22</a>
-                <div class="video_title">이상한 나라</div>
+                <div class="video_title">${playVideo.title}</div>
                 <div class="video_des_containner">
                     <div>
-                        <span>조회수 316,526회</span>
-                        <span>· 2022. 9. 1.</span>
+                        <span>조회수 ${playVideo.views}회</span>
+                        <span>· ${playVideo.reg_datetime}</span>
                     </div>
                     <div class="like_sharing_store">
                         <span><i class="fa-regular fa-thumbs-up"></i>&nbsp1.7천</span>
@@ -742,353 +873,160 @@
         <!-- main video comment-->
         <div class="main_video_comment">
             <div class="comment_summary">
-                <div style="font-size: 16px">댓글 460개</div>
-                <div style="font-size: 14px; margin-left: 20px"><i class="fa-solid fa-bars"></i> 정렬기준</div>
+                <div style="font-size: 16px">댓글 ${commentCnt}개</div>
             </div>
-            <div class="media comment_writing">
-                <img src="/web/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                     style="width: 30px; height: 30px; border-radius: 26px">
-                <div class="media-body">
-                    <input type="text" id="comment_add" class="comment_add" placeholder="댓글 추가..." value="" style="width: 110%;">
+            <form action="/commentAdd.do" method="post" id="commentAdd">
+                <div class="media comment_writing">
+                    <img src="../../resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+                         style="width: 30px; height: 30px; border-radius: 26px">
+                    <div class="media-body">
+                        <input type="text" id="comment_add" class="comment_add" placeholder="댓글 추가..."
+                               style="width: 110%;">
+                    </div>
                 </div>
-            </div>
+            </form>
             <div class="comment-fnc">
                 <input type="button" value="취소" id="cancelBtn" name="cancelBtn" style="display: none;">
                 <input type="button" value="댓글" id="addBtn" name="addBtn" style="display: none;">
             </div>
-            <div class="comment_append">
-                <img src="/web/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                     style="width: 30px; height: 30px; border-radius: 26px">
-                <div class="comment_append_contents">
-                    <div class="comment_append_accounttime">
-                        <div class="comment_append_account">dddd</div>
-                        <div class="comment_append_time">30분 전</div>
-                    </div>
-                    <div class="comment_append_maincomment"> </div>
-                    <div class="comment_append_morecontainner">
-                        <div class="comment_append_like"><i class="fa-regular fa-thumbs-up comment_like"></i>&nbsp6</div>
-                        <div class="comment_append_dislike"><i class="fa-regular fa-thumbs-down"></i>&nbsp8</div>
-                        <button class="comment_append_morecomment">답글</button>
-                    </div>
-                        <div class="comment_append_writing_containner">
-                            <div class="comment_append_containner">
-                                <img src="/web/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
-                                     style="width: 30px; height: 30px; border-radius: 26px">
-                                <input type="text" id="comment_append_writing" class="comment_append_writing" placeholder="대댓글 추가..." value="" style="width: 960px;">
+            <div class="comment_container">
+                <c:forEach var="item" items="${commentList}">
+                    <div class="comment_list">
+                        <div class="comment_append" id="comment_append"> <%--여기서부터 댓글 확인해야함--%>
+
+                            <div class="comment_append"> <%--여기서부터 댓글 확인해야함--%>
+                                <div id="comment_appends"></div>
+                                <img src="../../resources/css/img/human.jpg" class="align-self-start mr-3"
+                                     style='width: 30px; height: 30px; border-radius: 26px'>
+                                <div class="comment_append_contents">
+                                    <div class="comment_append_accounttime">
+                                        <div class="comment_append_account"> dddd</div>
+                                        <div class="comment_append_time"> ${item.insert_reg_datetime} </div>
+                                    </div>
+                                    <div class="comment_append_maincomment"> ${item.content} </div>
+                                    <div class="more_add">
+                                        <div class="comment_append_morecontainner">
+                                            <div class="comment_append_like"><i
+                                                    class="fa-regular fa-thumbs-up comment_like"></i>&nbsp6
+                                            </div>
+                                            <div class="comment_append_dislike"><i
+                                                    class="fa-regular fa-thumbs-down"></i>&nbsp8
+                                            </div>
+                                            <button class="comment_append_morecomment">답글</button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="comment_append_containner_button">
-                                <input type="button" value="취소" id="comment_append_cancel"  style="display: none; margin-left: auto;">
-                                <input type="button" value="댓글" id="comment_append_add"  style="display: none; margin-left: auto;">
+                        </div>
+
+                        <div class="more_comment_add_container" style="display: none" data-number="${item.no}">
+                            <form action="/moreCommentAdd.do" method="post" id="moreCommentAdd">
+                                <div class="media comment_writing">
+                                    <img src="/resources/css/img/human.jpg" class="align-self-start mr-3" alt="..."
+                                         style="width: 30px; height: 30px; border-radius: 26px">
+                                    <div class="media-body">
+                                        <input type="text" class="more_comment_add" placeholder="댓글 추가..." style="width: 110%;">
+                                    </div>
+                                </div>
+                            </form>
+
+                            <div class="comment-fnc" id="more_comment">
+                                <input type="button" value="취소" class="moreCancelBtn" name="cancelBtn">
+                                <input type="button" value="댓글" class="moreAddBtn" name="addBtn" >
                             </div>
-                            <button class="comment_append_more"><i class="fa-sharp fa-solid fa-caret-up"></i> 답글 n개</button>
-                            <div class="comment_append_contents_containner">
+                        </div>
+
+                        <div class="morecomment_append_view"> 답글 ${item.rereviews.size()} 개</div>
+
+                        <div class="recomment_container" style="display: none">
+                            <c:forEach var="items" items="${item.rereviews}">
+
+                                <div class="morecomment_append">
+                                    <div class="morecomment_append">
+                                        <div id="morecomment_appends"></div>
+                                        <img src="../../resources/css/img/human.jpg"
+                                             class="align-self-start mr-3"
+                                             style='width: 30px; height: 30px; border-radius: 26px'>
+                                        <div class="morecomment_append_contents">
+
+                                            <div class="morecomment_append_accounttime">
+                                                <div class="morecomment_append_account"> dddd</div>
+                                                <div class="morecomment_append_time"> ${items.insert_reg_datetime} </div>
+                                            </div>
+                                            <div class="morecomment_append_maincomment"> ${items.content} </div>
+                                            <div class="morecomment_append_morecontainner">
+                                                <div class="comment_append_like"><i
+                                                        class="fa-regular fa-thumbs-up comment_like"></i>&nbsp6
+                                                </div>
+                                                <div class="comment_append_dislike"><i
+                                                        class="fa-regular fa-thumbs-down"></i>&nbsp8
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                            <div class="moreAppendComment" style="margin-left: 60px;">
 
                             </div>
                         </div>
+                    </div>
+                    <%--대댓글--%>
+
+                </c:forEach>
+
+                <div id="inserAppendComment">
+
                 </div>
             </div>
-
         </div>
     </div>
+
     <!-- relatived contents -->
     <div class="relatived_contents">
         <div class="relatived_contents_ads_containner">
             <img class="relatived_contents_ads" src="/web/resources/css/img/dog.png">
         </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="search_list_containner">
-            <div class="media">
-                <img class="mr-3" src="../../resources/css//img/capture.png" alt="Generic placeholder image">
-                <div class="media-body">
-                    <div class="mt_0">최신영상상상상상상</div>
-                    <div class="search_list_sub_media">
-                        <div class="search_list_writer">게시자</div>
-                        <div class="media_desc">
-                            <div class="search_list_view">조회수 3.8만회</div>
-                            <div class="search_list_reg_date">· 4일전</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="relatived_contents_dropdown">
-                    <div class="dropdown">
-                        <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-ellipsis-vertical"></i>
-                        </div>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
-                            <a class="dropdown-item" href="javascript: void(0)"><i class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
+        <c:forEach var="item" items="${videoList}">
+            <div class="search_list_containner">
+                <div class="media">
+                    <a href="playpage.do?no=${item.no}">
+                        <img class="mr-3" style="width: 168px; height: 94px;" src=${item.thumbnail_mfile.url}>
+                    </a>
+                    <div class="videoTimeBackGround">
+                        <span class="videoTime" style="color: white; font-size: 14px;">${item.time}</span>
+                        <span class="videoHover" style="font-size:10px;"></span>
+                    </div>
+                    <div class="media-body">
+                        <div class="mt_0">${item.title}</div>
+                        <div class="search_list_sub_media">
+                            <div class="search_list_writer">게시자</div>
+                            <div class="media_desc">
+                                <div class="search_list_view">조회수 ${item.views}회</div>
+                                <div class="search_list_reg_date">·${item.compare_reg_datetime}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relatived_contents_dropdown">
+                        <div class="dropdown">
+                            <div class="dropdown video_dropdown dropdownMenuButton" data-toggle="dropdown"
+                                 aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-ellipsis-vertical"></i>
+                            </div>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="javascript: void(0)"><i
+                                        class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
+                                <a class="dropdown-item" href="javascript: void(0)"><i
+                                        class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </c:forEach>
     </div>
 </div>
-
-
-<script>
-
-</script>
 
 </body>
 </html>

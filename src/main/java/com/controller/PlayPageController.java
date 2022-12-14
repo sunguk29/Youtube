@@ -1,40 +1,49 @@
 package com.controller;
 
 import com.google.gson.Gson;
+import com.model.Review;
 import com.model.Video;
 import com.model.common.MFile;
 import com.service.HomeService;
+import com.service.PlayPageService;
 import com.util.Time;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
-
+import java.lang.reflect.Array;
 import java.text.ParseException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 @Controller
-public class HomeController {
+public class PlayPageController {
+
+    private final PlayPageService playPageService;
     private final HomeService homeService;
 
-    @GetMapping("/")
-    public ModelAndView youtubeHome(ModelAndView mav, HttpServletRequest request, Video video) throws ParseException {
+    @GetMapping("/playpage.do")
+    public ModelAndView playpage(ModelAndView mav, HttpServletRequest request, Video video, Review review) throws ParseException {
 
-        Gson gson = new Gson();
         Time times = new Time();
+
+        String num = request.getParameter("no");
+        int no = Integer.parseInt(num);
+        review.setVideo_no(no);
+
+        Video playVideo = playPageService.selectVideo(video);
+        int updateViews = playPageService.updateViews(no);
 
         ArrayList<Video> videoList = homeService.selectVideoList(video);
 
-        // 동영상 시간초
+        playVideo.setVideo_mfile(new Gson().fromJson(playVideo.getVideoFile(), MFile.class));
+
         int hour, minute, second;
 
         for(Video tmp:videoList){
@@ -85,17 +94,38 @@ public class HomeController {
 
         }
 
-        mav.addObject("videoList", videoList);
-        mav.addObject("video", video);
 
-        mav.setViewName("main");
+        ArrayList<Review> commentList = playPageService.selectCommentList(review);
+
+        for(Review item: commentList){
+            item.setInsert_reg_datetime(times.TimeFormatChatTimeString(item.getReg_datetime()));
+
+            ArrayList<Review> rereviews = playPageService.selectMoreCommentList(item.getNo(), item.getVideo_no());
+            item.setRereviews(rereviews);
+
+            for(Review rereview: rereviews){
+                rereview.setInsert_reg_datetime(times.TimeFormatChatTimeString(rereview.getReg_datetime()));
+
+            }
+
+        }
+
+        int commentCnt = playPageService.selectCommentCnt(review);
+        int moreCommentCnt = playPageService.selectMoreCommentCnt(review);
+
+
+        log.info("videoList", videoList);
+
+        mav.addObject("videoList", videoList);
+        mav.addObject("playVideo", playVideo);
+        mav.addObject("video", video);
+        mav.addObject("review", review);
+        mav.addObject("commentList", commentList);
+        mav.addObject("commentCnt", commentCnt);
+        mav.addObject("moreCommentCnt", moreCommentCnt);
+
+        mav.setViewName("playpage");
         return mav;
     }
-
-
-
-
-
-
 
 }

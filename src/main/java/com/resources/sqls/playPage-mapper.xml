@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mapper.PlayPageMapper">
+    <select id="selectVideo" resultType="com.model.Video">
+        select *, video_file AS videoFile
+        from video
+        where no = #{no}
+    </select>
+
+    <insert id="insertComment" parameterType="com.model.Review" useGeneratedKeys="true" keyProperty="no">
+        insert into review(type, user_no, video_no, content,
+                           reg_datetime, update_datetime, review_no)
+        VALUES (#{type}, #{user_no}, #{video_no}, #{content},
+                now(), now(), #{review_no})
+    </insert>
+
+    <select id="selectCommentList" resultType="com.model.Review">
+        select *
+        from review
+        where video_no = #{video_no}
+          and review_no = 0
+    </select>
+
+    <select id="selectReviewNo" resultType="com.model.Review">
+        select *
+        from review
+        where no = #{no}
+    </select>
+
+    <select id="selectMoreCommentList" resultType="com.model.Review">
+        select *
+        from review
+        where video_no=#{video_no}
+          and review_no=#{no}
+        order by review_no asc
+    </select>
+
+    <select id="selectMoreCommentCnt" resultType="Integer">
+        select count(*)
+        from review
+        where video_no = #{video_no}
+          and review_no = #{no}
+    </select>
+
+    <select id="selectCommentCnt" resultType="Integer">
+        select count(*)
+        from review
+        where video_no = #{video_no}
+          and review_no = 0
+    </select>
+
+    <update id="updateViews" parameterType="Integer">
+        update video
+        set views = ifnull(views, 0) + 1
+        where no = #{no}
+    </update>
+
+    <insert id="insertMoreComment" parameterType="com.model.Review" useGeneratedKeys="true" keyProperty="no">
+        insert into review(type, user_no, video_no, content,
+                           reg_datetime, update_datetime, review_no)
+        VALUES (#{type}, #{user_no}, #{video_no}, #{content},
+                now(), now(), #{review_no})
+    </insert>
+
+</mapper>
