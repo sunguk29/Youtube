@@ -45,6 +45,11 @@
 
 
 <style>
+
+    body {
+        cursor: pointer;
+    }
+
     .btn:focus, .btn:active {
         outline: none !important;
         box-shadow: none !important;
@@ -850,7 +855,7 @@
             <c:forEach items="${videoList}" var="item" begin="0" end="14" varStatus="status">
                 <div class="col">
                     <div class="card-container">
-                        <div class="main_video_container">
+                        <div class="main_video_container" value="${item.no}">
                             <img src="${item.thumbnail_mfile.url}" class="card-img-top" alt="...">
                             <div class="videoTimeBackGround">
                                 <span class="videoTime" style="color: white;">${item.time}</span>
@@ -877,12 +882,13 @@
                                                                 class="fa-solid fa-clock fa-lg"></i>&nbsp;나중에 볼 동영상에 저장</a>
                                                         <a class="dropdown-item" href="javascript: void(0)"><i
                                                                 class="fa fa-circle-plus fa-lg"></i>&nbsp;재생목록에 저장</a>
+                                                        <div class="get-item" style="display: none">${videoList[14].no}</div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                        <%--채널이름 필요할거같음--%>
+
                                     <p class="video_info" style="font-size: 14px;">User</p>
                                     <p class="video_info" style="font-size: 14px;"> 조회수 ${item.views}
                                         ·${item.compare_reg_datetime}</p>
@@ -1035,7 +1041,7 @@
 <script>
 
     var postData = {
-        lastNo: 123
+        lastNo: document.querySelector(".get-item").innerHTML
     }
 
     $(document).ready(function () {
@@ -1291,7 +1297,7 @@
     }
 
     $('#saveBtn').click(function () {
-        alert('hi');
+        confirm("저장하시겠습니까?")
 
         let form = document.getElementById('insertModalForm');
         const formData = new FormData(form);
