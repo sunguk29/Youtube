@@ -41,6 +41,8 @@
             crossorigin="anonymous"></script>
 
 
+
+
     <title>Youtube Modal</title>
 </head>
 
@@ -640,7 +642,10 @@
                     <span class="btn input-group-text"><i class="fa-solid fa-magnifying-glass"></i></span>
             </div>
             <button class="make_video"><i class="fa-solid fa-video"></i></button>
+
+
             <div id="buttonDiv"></div>
+
         </div>
         <!-- account and alarm -->
         <div>
@@ -1047,32 +1052,87 @@
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 <script>
 
+
+
+    var id_token;
+
     function handleCredentialResponse(response) {
-        console.log("Encoded JWT ID token: " + response.credential);
+
+        // console.log("Encoded JWT ID token: " + response.credential);
         /*백엔드 서버로 인증*/
-        var id_token = response.credential;
+        id_token = response.credential
 
-        fetch("/googleLogin", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json"
-            },
-            body: JSON.stringify(id_token),
-        }).then((response) => {
-            console.log("성공",  response);
+        sessionStorage.setItem("token", id_token);
 
-        })
+        const h = 'https://accounts.google.com/o/oauth2/v2/auth';
+        const c = '558731967747-jev153qunta4ipl2s3p3dunvj3sn0ku3.apps.googleusercontent.com';
+        const r = 'http://localhost:8080';
+        const t = 'code';
+        location.href =   h + '?' + 'client_id=' +
+            c + '&redirect_uri=' + r + '&response_type=' +
+            t + '&scope=https://www.googleapis.com/auth/userinfo.email'
+
+
+
 
     }
-    window.onload = function () {
+
+    window.onload = async function () {
         google.accounts.id.initialize({
             client_id: "558731967747-jev153qunta4ipl2s3p3dunvj3sn0ku3.apps.googleusercontent.com",
             callback: handleCredentialResponse
         });
+
+        id_token = sessionStorage.getItem("token");
+
+
+        var googleParms = new URLSearchParams(location.search)
+
+        if (googleParms.toString() == "") {
+            console.log("sssssssssssssssss")
+
+        } else {
+
+
+
+
+            console.log(googleParms.toString())
+
+            var googleApiParams = googleParms.get('code').toString()
+
+            // console.log(id_token)
+
+            var clientSecret = 'AIzaSyB-QrorkQHvm66Ohnsuw4dRT9KDeyrW5uk'
+            var clientId = '558731967747-jev153qunta4ipl2s3p3dunvj3sn0ku3.apps.googleusercontent.com'
+            var redirectUri = 'http://localhost:8080'
+
+            const url = `code=` + googleApiParams + `
+            &client_id=` + clientId + `
+            &client_secret=` + clientSecret + `
+            &redirect_uri=` + redirectUri + `
+            &grant_type=authorization_code`
+
+
+            var googleData = {
+                apiToken: id_token,
+                apiParams : googleApiParams
+            }
+
+            fetch("/googleLogin", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json"
+                },
+                body: JSON.stringify(googleData)
+            }).then((response) => {
+
+            })
+        }
+
         google.accounts.id.renderButton(
             document.getElementById("buttonDiv"),
-            { theme: "outline", size: "large" }  // customization attributes
+            {theme: "outline", size: "large"}  // customization attributes
         );
         google.accounts.id.prompt(); // also display the One Tap dialog
     }

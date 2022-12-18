@@ -2,6 +2,9 @@ package com.restcontroller;
 
 import com.api.sns.kakao.KakaoInfo;
 import com.aws.file.FileUploadUtility;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.model.Review;
 import com.model.Video;
@@ -15,20 +18,42 @@ import lombok.extern.slf4j.Slf4j;
 import net.bramp.ffmpeg.FFprobe;
 import net.bramp.ffmpeg.probe.FFmpegFormat;
 import net.bramp.ffmpeg.probe.FFmpegProbeResult;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.HttpClientBuilder;
+import org.apache.http.message.BasicNameValuePair;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.*;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
+
+import com.api.LoginAPI;
+import com.api.sns.google.GoogleAPI;
+import com.api.sns.google.GoogleAccess;
+import com.api.sns.google.GoogleInfo;
+import com.model.User;
+
+
 
 @Slf4j
 @RestController
@@ -37,6 +62,14 @@ public class HomeRestController {
 
     private final HomeService homeService;
     private final FileUploadUtility fileUploadUtility;
+
+    private final GoogleAPI googleAPI;
+
+    @Value("${DEFAULT.PROFILE.IMAGE.URL}")
+    private String DEFAULT_PROFILE_IMAGE_URL;
+    @Value("${DEFAULT.PROFILE.IMAGE.NAME}")
+    private String DEFAULT_PROFILE_IMAGE_NAME;
+
 
     int last_no;
     public String word;
@@ -280,11 +313,93 @@ public class HomeRestController {
 //    }
 
     @PostMapping("/googleLogin")
-    public ResponseEntity googleLogin(@RequestBody String params){
+    public ResponseEntity googleLogin(HttpServletRequest req, @RequestBody Map<String, Object> pr)throws Exception{
 
         //log.info("aaaaaaaaaaaaaa" + String.valueOf(params));
-        log.info("bbbbbbbbbbbb" + params);
 
+        String idToken = pr.get("apiToken").toString();
+
+        String code = pr.get("apiParams").toString();
+        String clientSecret = "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";
+        String clientId = "558731967747-jev153qunta4ipl2s3p3dunvj3sn0ku3.apps.googleusercontent.com";
+        String redirectUri = "http://localhost:8080";
+
+
+        String RequestUrl = "https://www.googleapis.com/oauth2/v4/token";
+
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
+        postParams.add(new BasicNameValuePair("client_id", clientId));
+        postParams.add(new BasicNameValuePair("client_secret", clientSecret));
+        postParams.add(new BasicNameValuePair("redirect_uri", redirectUri)); // 리다이렉트 URI
+        postParams.add(new BasicNameValuePair("code", code)); // auth code 값
+
+        HttpClient client = HttpClientBuilder.create().build();
+        HttpPost post = new HttpPost(RequestUrl);
+        JsonNode returnNode = null;
+
+        log.info("jjjjjjjjjjjjjjjjj" + code);
+
+
+        try {
+            post.setEntity(new UrlEncodedFormEntity(postParams));
+            HttpResponse response = client.execute(post);
+            int responseCode = response.getStatusLine().getStatusCode();
+
+            log.info("Sending 'POST' request to URL : " + RequestUrl);
+            log.info("Post parameters : " + postParams);
+            log.info("Response Code : " + responseCode);
+
+
+            // JSON 형태 반환값 처리
+            ObjectMapper mapper = new ObjectMapper();
+            returnNode = mapper.readTree(response.getEntity().getContent());
+
+            log.info("tttttttttttttt" + returnNode.get("access_token"));
+
+
+            User user = new User();
+            MFile profile_img = new MFile();
+
+
+            GoogleInfo googleInfo = code != null ? googleAPI.getUser(returnNode.get("access_token").toString()) : null;
+
+            log.info("iiiiiiiiiiiiiii" + googleInfo);
+
+            if (googleInfo == null) {
+                /** Login Failed*/
+                return null;
+            }
+
+            user.setEmail(googleInfo.getEmail());
+            user.setId(googleInfo.getId());
+            user.setName(googleInfo.getName() == null ? "Empty User Name" : googleInfo.getName());
+            profile_img.setUrl(googleInfo.getPicture() != null ? googleInfo.getPicture() : null);
+            if (profile_img.getUrl() == null) {
+                profile_img.setUrl(DEFAULT_PROFILE_IMAGE_URL);
+                profile_img.setName(DEFAULT_PROFILE_IMAGE_NAME);
+            }
+            user.setProfile_img(profile_img);
+
+            log.info("kkkkkkkkkkk" + user);
+
+            HttpSession session =  req.getSession();
+
+            log.info(session.getId());
+
+            session.setAttribute("test", new User());
+
+            User user2 = (User) session.getAttribute("test");
+
+            log.info("qqqqqqqqq" + user2);
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return new ResponseEntity(DefaultRes.res(HttpStatus.OK), HttpStatus.OK);
     }
 

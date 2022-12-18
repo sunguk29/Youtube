@@ -285,7 +285,12 @@
             <artifactId>spring-messaging</artifactId>
             <version>${org.springframework-version}</version>
         </dependency>
+
+        <!-- 구글 로그인 api -->
+
+
     </dependencies>
+
 
     <!--Amazon CDN Maven-->
     <dependencyManagement>
@@ -326,6 +331,9 @@
         </plugins>
     </build>
     <!--동영상 시간 추출-->
+
+
+
 
 
 </project>
